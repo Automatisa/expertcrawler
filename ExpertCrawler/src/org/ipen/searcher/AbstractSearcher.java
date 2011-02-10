@@ -6,20 +6,21 @@ import org.ipen.graph.Graph;
 /**
 * This abstract class provides a skeletal implementation of the Searcher
 * interface to minimize the effort required to implement this interface.
-* @author Thiago
+* @author Thiago Reis
 */
 public abstract class AbstractSearcher implements Searcher {
-	private HashSet<String> queryTerms = new HashSet();
-	private String seedPage = new String();
+	private HashSet<String> queryTerms;
+	private String seedPage;
 	private int maxFrontierSize;
 	private int maxGraphSize;
-	private Graph searchGraph = new Graph();
+	private Graph searchGraph;
 
 	/** Creates a new Searcher with minimum parameters.
 	* @author Thiago*/
 	public AbstractSearcher(HashSet queryTerms, String seedPage) {
 		this.queryTerms = queryTerms;
 		this.seedPage = seedPage;
+		this.searchGraph = new Graph();
 	}
 
 	/** Creates a new Searcher with all parameters.
@@ -29,6 +30,7 @@ public abstract class AbstractSearcher implements Searcher {
 		this.seedPage = seedPage;
 		this.maxFrontierSize = maxFrontierSize;
 		this.maxGraphSize = maxGraphSize;
+		this.searchGraph = new Graph();
 	}
 
 	public final HashSet getQueryTerms() {

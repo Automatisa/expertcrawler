@@ -15,8 +15,8 @@ public class Page {
 	private String pageUrl;
 	private String pageHtml;
 	private HashSet pageLinks;
-	private boolean isConnected = false;
-	private boolean isFetched = false;
+	private boolean isConnected;
+	private boolean isFetched;
 	private URL urlAddress;
 
 	public Page(String url) {

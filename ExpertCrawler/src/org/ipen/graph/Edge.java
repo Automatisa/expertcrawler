@@ -1,20 +1,34 @@
 package org.ipen.graph;
 
-public class Edge {
+public class Edge<V> {
 	private int index;
+	private V value;
 	private float weight;
-	private Vertex sourceVertex;
-	private Vertex targetVertex;
+	private Node sourceNode;
+	private Node targetNode;
 
-	public Edge(Vertex sourceVertex, Vertex targetVertex) {
-		this.sourceVertex = sourceVertex;
-		this.targetVertex = targetVertex;
+	public Edge(Node sourceNode, Node targetNode) {
+		this.sourceNode = sourceNode;
+		this.targetNode = targetNode;
 	}
 
-	public Edge(Vertex sourceVertex, Vertex targetVertex, int index) {
-		this.sourceVertex = sourceVertex;
-		this.targetVertex = targetVertex;
+	public Edge(Node sourceNode, Node targetNode, int index) {
+		this.sourceNode = sourceNode;
+		this.targetNode = targetNode;
 		this.index = index;
+	}
+
+	public Edge(Node sourceNode, Node targetNode, V value) {
+		this.sourceNode = sourceNode;
+		this.targetNode = targetNode;
+		this.value = value;
+	}
+
+	public Edge(Node sourceNode, Node targetNode, int index, V value) {
+		this.sourceNode = sourceNode;
+		this.targetNode = targetNode;
+		this.index = index;
+		this.value = value;
 	}
 
 	public int getIndex() {
@@ -25,6 +39,14 @@ public class Edge {
 		this.index = index;
 	}
 
+	public V getValue() {
+		return this.value;
+	}
+
+	public void setValue(V value) {
+		this.value = value;
+	}
+
 	public void setWeight(float weight) {
 		this.weight = weight;
 	}
@@ -33,11 +55,11 @@ public class Edge {
 		return this.weight;
 	}
 
-	public Vertex getSourceVertex() {
-		return this.sourceVertex;
+	public Node getSourceNode() {
+		return this.sourceNode;
 	}
 
-	public Vertex getTargetVertex() {
-		return this.targetVertex;
+	public Node getTargetNode() {
+		return this.targetNode;
 	}
 }

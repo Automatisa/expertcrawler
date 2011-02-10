@@ -4,27 +4,32 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class Graph {
-	private HashSet<Vertex> graphVertexes = new HashSet();
-	private HashSet<Edge> graphEdges = new HashSet();
+	private HashSet<Node> graphNodes;
+	private HashSet<Edge> graphEdges;
 
-	public boolean addVertex(Vertex vertex) {
-		return this.graphVertexes.add(vertex);
+	public Graph() {
+		this.graphNodes = new HashSet();
+		this.graphEdges = new HashSet();
 	}
 
-	public boolean removeVertex(Vertex vertex) {
-		return this.graphVertexes.remove(vertex);
+	public boolean addNode(Node node) {
+		return this.graphNodes.add(node);
 	}
 
-	public boolean containsVertex(Vertex vertex) {
-		return this.graphVertexes.contains(vertex);
+	public boolean removeNode(Node node) {
+		return this.graphNodes.remove(node);
 	}
 
-	public Iterator getVertexesIterator() {
-		return this.graphVertexes.iterator();
+	public boolean containsNode(Node node) {
+		return this.graphNodes.contains(node);
+	}
+
+	public Iterator getNodesIterator() {
+		return this.graphNodes.iterator();
 	}
 
 	public boolean addEdge(Edge edge) {
-		if (!this.graphVertexes.contains(edge.getSourceVertex()) || !this.graphVertexes.contains(edge.getTargetVertex()) || this.graphEdges.contains(edge)) {
+		if (!this.graphNodes.contains(edge.getSourceNode()) || !this.graphNodes.contains(edge.getTargetNode()) || this.graphEdges.contains(edge)) {
 			return false;
 		}
 
@@ -43,8 +48,52 @@ public class Graph {
 		return this.graphEdges.iterator();
 	}
 
-	public int getVertexesSize() {
-		return this.graphVertexes.size();
+	public boolean addChild(Node childNode, Node parentNode) {
+		if (!this.graphNodes.contains(parentNode) || this.graphNodes.contains(childNode)) {
+			return false;
+		}
+
+		boolean operation1 = this.addNode(childNode);
+		boolean operation2 = this.addEdge(new Edge(parentNode, childNode));
+
+		if (operation1 && operation2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean addParent(Node parentNode, Node childNode) {
+		if (!this.graphNodes.contains(childNode) || this.graphNodes.contains(parentNode)) {
+			return false;
+		}
+
+		boolean operation1 = this.addNode(parentNode);
+		boolean operation2 = this.addEdge(new Edge(parentNode, childNode));
+
+		if (operation1 && operation2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean removeAll() {
+		boolean operation1 = this.graphEdges.removeAll(graphEdges);
+		boolean operation2 = this.graphNodes.removeAll(graphNodes);
+
+		if (operation1 && operation2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public int getNodesSize() {
+		return this.graphNodes.size();
 	}
 
 	public int getEdgesSize() {
@@ -52,6 +101,6 @@ public class Graph {
 	}
 
 	public int getGraphSize() {
-		return this.graphVertexes.size();
+		return this.graphNodes.size();
 	}
 }
