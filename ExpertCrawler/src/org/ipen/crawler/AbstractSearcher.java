@@ -4,27 +4,27 @@ import java.util.HashSet;
 import org.ipen.graph.Graph;
 
 /**
-* This abstract class provides a skeletal implementation of the Crawler
+* This abstract class provides a skeletal implementation of the Searcher
 * interface to minimize the effort required to implement this interface.
 * @author Thiago
 */
-public abstract class AbstractCrawler implements Crawler {
+public abstract class AbstractSearcher implements Searcher {
 	private HashSet<String> queryTerms = new HashSet();
 	private String seedPage = new String();
 	private int maxFrontierSize;
 	private int maxGraphSize;
 	private Graph searchGraph = new Graph();
 
-	/** Creates a new Crawler with minimum parameters.
+	/** Creates a new Searcher with minimum parameters.
 	* @author Thiago*/
-	public AbstractCrawler(HashSet queryTerms, String seedPage) {
+	public AbstractSearcher(HashSet queryTerms, String seedPage) {
 		this.queryTerms = queryTerms;
 		this.seedPage = seedPage;
 	}
 
-	/** Creates a new Crawler with all parameters.
+	/** Creates a new Searcher with all parameters.
 	* @author Thiago*/
-	public AbstractCrawler(HashSet queryTerms, String seedPage, int maxFrontierSize, int maxGraphSize) {
+	public AbstractSearcher(HashSet queryTerms, String seedPage, int maxFrontierSize, int maxGraphSize) {
 		this.queryTerms = queryTerms;
 		this.seedPage = seedPage;
 		this.maxFrontierSize = maxFrontierSize;

@@ -11,17 +11,17 @@ import org.ipen.graph.Edge;
 * (FIFO - queue frontier) extending the abstract implementation of Abstract Crawler.
 * @author Thiago
 */
-public class BreadthFirstCrawler extends AbstractCrawler {
+public class BreadthSearcher extends AbstractSearcher {
 	private LinkedList<String> searchFrontier = new LinkedList();
 	private int currentVertexIndex = 0;
 	private int currentEdgeIndex = 0;
 	private boolean isSearching = false;
 
-	public BreadthFirstCrawler(HashSet queryTerms, String seedPage) {
+	public BreadthSearcher(HashSet queryTerms, String seedPage) {
 		super(queryTerms, seedPage);
 	}
 
-	public BreadthFirstCrawler(HashSet queryTerms, String seedPage, int maxFrontierSize, int maxGraphSize) {
+	public BreadthSearcher(HashSet queryTerms, String seedPage, int maxFrontierSize, int maxGraphSize) {
 		super(queryTerms, seedPage, maxFrontierSize, maxGraphSize);
 	}
 
