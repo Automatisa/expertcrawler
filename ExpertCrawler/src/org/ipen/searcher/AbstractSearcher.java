@@ -1,4 +1,4 @@
-package org.ipen.crawler;
+package org.ipen.searcher;
 
 import java.util.HashSet;
 import org.ipen.graph.Graph;
