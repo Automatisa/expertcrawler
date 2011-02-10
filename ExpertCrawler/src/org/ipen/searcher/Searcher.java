@@ -1,13 +1,12 @@
 package org.ipen.searcher;
 
 import java.util.HashSet;
-import java.util.LinkedList;
 import org.ipen.graph.Graph;
 
 /**
-* The root interface in the Searcher Framework. This interface describes the basics
-* functionalities of all Crawlers.
-* @author Thiago
+* The root interface in the Searcher Framework. This interface
+* describes the basics functionalities to all Searchers.
+* @author Thiago Reis
 */
 public abstract interface Searcher {
 	/**Returns the query terms collection used in the search process.
@@ -41,10 +40,6 @@ public abstract interface Searcher {
 	/**Sets the maximum number of pages to be kept in the search graph.
 	* @param maxGraphSize The maximum number of pages to be kept in the search graph during the search process.*/
 	public abstract void setMaxGraphSize(int maxGraphSize);
-
-	/**Returns the search frontier of the search process.
-	* @return */
-	public abstract LinkedList<String> getSearchFrontier();
 
 	/**Returns the search graph of the search process.
 	* @return */
