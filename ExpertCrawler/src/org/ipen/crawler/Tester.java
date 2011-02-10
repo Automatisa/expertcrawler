@@ -21,7 +21,7 @@ public class Tester {
 
 		queryTerms.add("nuclear");
 		seedPage = "http://download.oracle.com/javase/tutorial/index.html";
-		BreadthFirstCrawler crawler = new BreadthFirstCrawler(queryTerms, seedPage, 10, 200);
+		BreadthSearcher crawler = new BreadthSearcher(queryTerms, seedPage, 10, 200);
 		crawler.search();
 
 		System.out.println("Frontier");
