@@ -60,6 +60,7 @@ public class BreadthSearcher extends AbstractSearcher {
 					this.searchFrontier.addLast(currentLink);
 					super.getSearchGraph().addNode(currentNodeChild);
 					super.getSearchGraph().addEdge(currentEdge);
+					//super.getSearchGraph().addChild(currentNodeChild, currentNodesParent);
 				}
 			}
 

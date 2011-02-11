@@ -24,7 +24,7 @@ public class BreadthCrawler extends BreadthSearcher implements Runnable {
 			while (queryTermsIterator.hasNext()) {
 				String currentQueryTerm = queryTermsIterator.next();
 
-				if (!currentNode.getValue().toLowerCase().contains(currentQueryTerm)) {
+				if (!currentNode.getObject().toLowerCase().contains(currentQueryTerm)) {
 					relevance = false;
 				}
 			}

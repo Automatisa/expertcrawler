@@ -12,6 +12,8 @@ import org.ipen.graph.Node;
 //TODO Crawler - definir heuristicas
 //TODO GUI - parametros/arvore
 //TODO GUI - html browser
+//TODO Crawler - configurar max frontier size
+//TODO Crawler - colector assincrono
 
 public class Tester {
 	public static void maina(String[] args) {
@@ -29,7 +31,7 @@ public class Tester {
 		Iterator<Node> nodesIterator = crawler.getSearchGraph().getNodesIterator();
 		while (nodesIterator.hasNext()) {
 			Node<String> currentNode = nodesIterator.next();
-			System.out.println("Index: " + currentNode.getIndex() + ", URL: " + currentNode.getValue());
+			System.out.println("Index: " + currentNode.getIndex() + ", URL: " + currentNode.getObject());
 		}
 	}
 
@@ -68,7 +70,7 @@ public class Tester {
 			Iterator<Node> nodesIterator = crawler.getSearchGraph().getNodesIterator();
 			while (nodesIterator.hasNext()) {
 				Node<String> currentNode = nodesIterator.next();
-				System.out.println("Index: " + currentNode.getIndex() + ", URL: " + currentNode.getValue());
+				System.out.println("Index: " + currentNode.getIndex() + ", URL: " + currentNode.getObject());
 			}
 		}
 		catch (InterruptedException e) {
