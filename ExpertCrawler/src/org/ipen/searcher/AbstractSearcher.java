@@ -68,4 +68,11 @@ public abstract class AbstractSearcher implements Searcher {
 	public final Graph getSearchGraph() {
 		return this.searchGraph;
 	}
+
+	//Design patterns: template method
+	//public final void search() {
+	//	if (isSearching()) {
+	//		return;
+	//	}
+	//}
 }

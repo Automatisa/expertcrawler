@@ -49,14 +49,12 @@ public class Graph {
 	}
 
 	public boolean addChild(Node childNode, Node parentNode) {
-		if (!this.graphNodes.contains(parentNode) || this.graphNodes.contains(childNode)) {
+		Edge currentEdge = new Edge(parentNode, childNode);
+
+		if (!this.graphNodes.contains(parentNode) || this.graphNodes.contains(childNode) || this.graphEdges.contains(currentEdge)) {
 			return false;
 		}
-
-		boolean operation1 = this.addNode(childNode);
-		boolean operation2 = this.addEdge(new Edge(parentNode, childNode));
-
-		if (operation1 && operation2) {
+		else if(this.addNode(childNode) && this.addEdge(currentEdge)) {
 			return true;
 		}
 		else {
@@ -65,14 +63,12 @@ public class Graph {
 	}
 
 	public boolean addParent(Node parentNode, Node childNode) {
-		if (!this.graphNodes.contains(childNode) || this.graphNodes.contains(parentNode)) {
+		Edge currentEdge = new Edge(parentNode, childNode);
+
+		if (!this.graphNodes.contains(childNode) || this.graphNodes.contains(parentNode) || this.graphEdges.contains(currentEdge)) {
 			return false;
 		}
-
-		boolean operation1 = this.addNode(parentNode);
-		boolean operation2 = this.addEdge(new Edge(parentNode, childNode));
-
-		if (operation1 && operation2) {
+		else if(this.addNode(parentNode) && this.addEdge(currentEdge)) {
 			return true;
 		}
 		else {

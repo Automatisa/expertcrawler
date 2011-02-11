@@ -1,8 +1,9 @@
 package org.ipen.graph;
 
-public class Node<V> {
+public class Node<O> {
 	private int index;
-	private V value;
+	private String label;
+	private O object;
 
 	public Node() {
 		return;
@@ -12,9 +13,27 @@ public class Node<V> {
 		this.index = index;
 	}
 
-	public Node(int index, V value) {
+	public Node(String label) {
+		this.label = label;
+	}
+
+	public Node(O object) {
+		this.object = object;
+	}
+
+	public Node(int index, String label) {
 		this.index = index;
-		this.value = value;
+		this.label = label;
+	}
+
+	public Node(int index, O object) {
+		this.index = index;
+		this.object = object;
+	}
+
+	public Node(String label, O object) {
+		this.label = label;
+		this.object = object;
 	}
 
 	public int getIndex() {
@@ -25,11 +44,19 @@ public class Node<V> {
 		this.index = index;
 	}
 
-	public V getValue() {
-		return this.value;
+	public String getLabel() {
+		return this.label;
 	}
 
-	public void setValue(V value) {
-		this.value = value;
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public O getObject() {
+		return this.object;
+	}
+
+	public void setObject(O object) {
+		this.object = object;
 	}
 }
