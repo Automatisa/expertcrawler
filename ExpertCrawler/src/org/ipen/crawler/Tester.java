@@ -1,8 +1,30 @@
 package org.ipen.crawler;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import org.ipen.graph.Node;
+import java.util.LinkedHashSet;
+import org.ipen.graph.DirectedGraph;
+
+//import java.util.LinkedHashSet;
+
+public class Tester {
+	public static void main(String[] args) {
+		String v1 = "v1";
+		String v2 = "v2";
+		String v3 = "v3";
+		DirectedGraph<String> g = new DirectedGraph();
+		LinkedHashSet<String> t = new LinkedHashSet();
+		t.add(v2);
+		g.put(v1, t);
+		//t.add("v2");
+		//g.add("v1", t);
+
+		System.out.println(g.containsKey("v1"));
+		System.out.println(g.containsValue("v2"));
+	}
+}
+
+//LinkedHashSet<String> l = new LinkedHashSet<String>();
+//l.add("teste");
+//l.add(null);
 
 //TODO Http - singleton proxy
 //TODO Graph - imprimir grafo
@@ -15,6 +37,7 @@ import org.ipen.graph.Node;
 //TODO Crawler - configurar max frontier size
 //TODO Crawler - colector assincrono
 
+/*
 public class Tester {
 	public static void maina(String[] args) {
 		HashSet queryTerms = new HashSet();
@@ -78,3 +101,4 @@ public class Tester {
 		}
 	}
 }
+*/

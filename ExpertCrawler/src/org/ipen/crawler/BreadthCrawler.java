@@ -2,9 +2,9 @@ package org.ipen.crawler;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import org.ipen.searcher.BreadthSearcher;
-import org.ipen.graph.Node;
-
+//import org.ipen.searcher.BreadthSearcher;
+//import org.ipen.graph.Node;
+/*
 public class BreadthCrawler extends BreadthSearcher implements Runnable {
 	public BreadthCrawler(HashSet queryTerms, String seedPage) {
 		super(queryTerms, seedPage);
@@ -36,3 +36,4 @@ public class BreadthCrawler extends BreadthSearcher implements Runnable {
 		super.search();
 	}
 }
+*/

@@ -3,14 +3,15 @@ package org.ipen.searcher;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Iterator;
-import org.ipen.graph.Node;
-import org.ipen.graph.Edge;
+//import org.ipen.graph.Node;
+//import org.ipen.graph.Edge;
 
 /**
 * This class provides a concrete implementation of a Breadth-First Search algorithm
 * (FIFO - queue frontier) extending the abstract implementation of Abstract Searcher.
 * @author Thiago Reis
 */
+/*
 public class BreadthSearcher extends AbstractSearcher {
 	private LinkedList<String> searchFrontier;
 	private boolean isSearching;
@@ -71,3 +72,4 @@ public class BreadthSearcher extends AbstractSearcher {
 		}
 	}
 }
+*/
