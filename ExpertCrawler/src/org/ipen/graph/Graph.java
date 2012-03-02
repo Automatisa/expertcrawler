@@ -1,102 +1,40 @@
 package org.ipen.graph;
 
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Map;
 
-public class Graph {
-	private HashSet<Node> graphNodes;
-	private HashSet<Edge> graphEdges;
+public interface Graph<V> extends Map<V, LinkedHashSet<V>>, Iterable {
+	// Map Interface
+	// Query Operations
+	//int size();
+	//boolean isEmpty();
+	//boolean containsKey(Object key);
+	//boolean containsValue(Object value);
+	//V get(Object key);
 
-	public Graph() {
-		this.graphNodes = new HashSet();
-		this.graphEdges = new HashSet();
-	}
+	// Modification Operations
+	//V put(K key, V value);
+	//V remove(Object key);
 
-	public boolean addNode(Node node) {
-		return this.graphNodes.add(node);
-	}
+	// Bulk Operations
+	//void putAll(Map<? extends K, ? extends V> m);
+	//void clear();
 
-	public boolean removeNode(Node node) {
-		return this.graphNodes.remove(node);
-	}
+	// Views
+	//Set<K> keySet();
+	//Collection<V> values();
+	//Set<Map.Entry<K, V>> entrySet();
+	//interface Entry<K,V>
+	//	K getKey();
+	//	V getValue();
+	//	V setValue(V value);
+	//	boolean equals(Object o);
+	//	int hashCode();
 
-	public boolean containsNode(Node node) {
-		return this.graphNodes.contains(node);
-	}
+	// Comparison and hashing
+	//boolean equals(Object o);
+	//int hashCode();
 
-	public Iterator getNodesIterator() {
-		return this.graphNodes.iterator();
-	}
-
-	public boolean addEdge(Edge edge) {
-		if (!this.graphNodes.contains(edge.getSourceNode()) || !this.graphNodes.contains(edge.getTargetNode()) || this.graphEdges.contains(edge)) {
-			return false;
-		}
-
-		return this.graphEdges.add(edge);
-	}
-
-	public boolean removeEdge(Edge edge) {
-		return this.graphEdges.remove(edge);
-	}
-
-	public boolean containsEdge(Edge edge) {
-		return this.graphEdges.contains(edge);
-	}
-
-	public Iterator getEdgesIterator() {
-		return this.graphEdges.iterator();
-	}
-
-	public boolean addChild(Node childNode, Node parentNode) {
-		Edge currentEdge = new Edge(parentNode, childNode);
-
-		if (!this.graphNodes.contains(parentNode) || this.graphNodes.contains(childNode) || this.graphEdges.contains(currentEdge)) {
-			return false;
-		}
-		else if(this.addNode(childNode) && this.addEdge(currentEdge)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean addParent(Node parentNode, Node childNode) {
-		Edge currentEdge = new Edge(parentNode, childNode);
-
-		if (!this.graphNodes.contains(childNode) || this.graphNodes.contains(parentNode) || this.graphEdges.contains(currentEdge)) {
-			return false;
-		}
-		else if(this.addNode(parentNode) && this.addEdge(currentEdge)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean removeAll() {
-		boolean operation1 = this.graphEdges.removeAll(graphEdges);
-		boolean operation2 = this.graphNodes.removeAll(graphNodes);
-
-		if (operation1 && operation2) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public int getNodesSize() {
-		return this.graphNodes.size();
-	}
-
-	public int getEdgesSize() {
-		return this.graphEdges.size();
-	}
-
-	public int getGraphSize() {
-		return this.graphNodes.size();
-	}
+	// Iterable Interface
+	//Iterator<T> iterator();
 }
