@@ -1,0 +1,461 @@
+﻿add/remove
+insert/delete
+peek/poll
+take/poll
+set/get
+push/pop
+tail/head
+first/last
+enqueue/dequeue
+parent/child/sibling
+descending/preceding
+predecessor/successor
+previous/next
+from/to
+source/target
+origem/destination
+link/unlink
+connect/unconnect
+
+degree/valency/indegree/outdegree
+incident/adjacent/neighbor/frontier
+item/entry/element/vertex/node/edge
+edge/arcs/arrows
+sequence/serial/order/priority
+
+
+
+Conceito: as operação são executadas no grafo, o grafo somente manipula os vértices, logo não existem operações para manipulação de arestas.
+Operações do grafo
+Operações do vértice
+
+
+
+Responsibility-Driven Design Constructs
+an application = a set of interacting objects
+an object = an implementation of one or more roles
+a role = a set of related responsibilities
+a responsibility = an obligation to perform a task or know information
+a collaboration = an interaction of objects or roles (or both)
+a contract = an agreement outlining the terms of a collaboration
+
+##################################################################################################################################
+
+Knowing classes
+
+Char		Único caractere
+String		Cadeia de caracteres livre (sem restrição de caracteres)
+Text		Cadeia de caracteres restrita - representa um texto em linguagem natural (restrição de códigos html, pos tags, etc)
+Word		Cadeia de caracteres restrita - representa uma palavra da linguagem natural (restrição de espaços, pontuação, etc)
+Token		Cadeia de caracteres restrita - representa uma palavra processada da linguagem natural (processamento de lemmatization, stemming, tagging)
+
+Tag			Cadeia de caracteres restrita - representa uma tag de linguagem de máquina (tags html, principalmento links)
+Sentence	Cadeia de caracteres restrita - em linguagem natural; tokenizada; possívelmente com lemmatization, stemming, tagging
+			Conhece a estrutura e relação dos tokens e seus metadados (rawform, pos taggings, )
+
+
+String
+	Word <> Token
+	Text <> Chain
+
+Segment
+Statement
+Text
+Sentence
+Token
+Term
+Word
+Expression
+Clause
+Sequence
+Chain
+
+##################################################################################################################################
+
+http://www.research.ibm.com/deepqa
+http://en.wikipedia.org/wiki/UIMA
+
+What kind of technology is Watson based on?
+Watson is an application of advanced Natural Language Processing, Information Retrieval, Knowledge Representation and Reasoning, and Machine Learning technologies to the field of open-domain question answering. At its core, Watson is built on IBM's DeepQA technology for hypothesis generation, massive evidence gathering, analysis, and scoring.
+
+What data is stored in Watson?
+All of Watson's data will be self-contained. Watson will perform without a connection to the web or any external resource. The vast majority of Watson's data will be a wide variety of natural language text. Some structured (formal knowledgebase's) and semi-structured data (tagged text) is also included mostly to help interpret text and refine answers. Exactly which data will be used for competing on Jeopardy! will be revealed at a later date, but the specific content and how to analyze and manage it are part of the research agenda.
+
+How can Watson handle the puns and wordplay that occur in Jeopardy?
+By reading many, many texts Watson learns how language is used. That means it learns the context and associations of words, which allows it to deal with some of the wordplay we find in Jeopardy!. But what is special about Watson is that it is able to also produce a confidence in its answer. If that confidence is low, it realizes: maybe it doesn't understand the question--maybe there is a pun or something it's not getting. On the other hand, if the confidence is high, it knows it likely understood the question and stands a good chance of getting that question right.
+
+On what kind of computer does this run?
+To achieve the levels of accuracy, confidence, and speed required by the Jeopardy! Challenge, a massively parallel high performance computing platform, like BlueGene maybe used. The system can be scaled up or down depending on different application requirements.
+
+How does QA technology compare to document search?
+The key difference between QA technology and document search is that document search takes a keyword query and returns a list of documents, ranked in order of relevance to the query, while QA technology takes a question expressed in natural language, seeks to understand it in much greater detail, and returns a precise answer to the question.
+
+Does DeepQA use UIMA?
+Yes. UIMA is a standard framework for building applications that perform deep analysis on unstructured content, including natural language text, speech, images and video. IBM contributed UIMA to open-source (see the Apache UIMA web site) to help facilitate and accelerate work in deep content analytics. UIMA is also now an OASIS standard. UIMA-AS implements UIMA on asynchronous messaging middleware. DeepQA and the Watson system uses UIMA-AS as its principal infrastructure for assembling, scaling-out and deploying all its analytic components.
+
+##################################################################################################################################
+
+http://www.cs.pitt.edu/mpqa/
+corpus anotado de opiniao
+
+http://www.youtube.com/watch?v=NFCZuzA4cFc
+Scientific data analysis
+
+
+
+Twitter
+http://code.google.com/p/iestwitter/source/browse/trunk/src/edu/shu/nlt/twitter/crawler/BasicFriendGraphCrawler.java
+http://www.winterwell.com/software/jtwitter.php
+
+
+
+Programação
+http://en.wikipedia.org/wiki/Design_Patterns/
+http://mahemoff.com/paper/software/learningGoFPatterns/
+http://sujitpal.blogspot.com/2006/05/java-data-structure-generic-tree.html
+http://www.interview-questions-java.com/java-collections.htm
+http://www.holub.com/goodies/java.collections.html
+http://code.google.com/p/python-graph/
+
+Responsibility-driven design is inspired by the client/server model. It focuses on the contract by asking:
+	What actions is this object responsible for? doing
+	What information does this object share? knowing
+
+http://en.wikipedia.org/wiki/Responsibility-driven_design
+http://en.wikipedia.org/wiki/GRASP_(object-oriented_design)
+
+
+http://www.roboearth.org
+http://www.inovacaotecnologica.com.br/noticias/noticia.php?artigo=mineracao-dados-inteligencia-coletiva&id=010150111222
+http://www.inovacaotecnologica.com.br/noticias/noticia.php?artigo=wikipedia-dos-robos&id=010180110817
+
+
+NLP
+http://nlp.stanford.edu/
+http://opennlp.apache.org/
+
+
+Java Base
+Java Collections Framework
+Java Regular Expressions
+Java Concurrency
+Java GUI
+Design Patterns
+Discrete Math (Sets theory, Graphs theory)
+
+##################################################################################################################################
+
+Mathematics
+	Sets							<java.util:Collection>
+	Graphs							<org.ipen.graph>
+--------------------------------------------------------------------------
+Artificial intelligence				<org.ipen.ai>
+	Search algorithms				<org.ipen.crawler>
+		Exhaustive
+			Breadth-first			<org.ipen.crawler:BreadthFirstCrawler>
+			Depth-first				<org.ipen.crawler:DepthFirstCrawler>
+    	Heuristic
+    		Best-first				<org.ipen.crawler:BestFirstCrawler>
+    		Best-n-first			<org.ipen.crawler:BestNFirstCrawler>
+    Machine learning				<org.ipen.ai.ml>
+    	Artificial neural network	<org.ipen.ai.ml.ann>
+    Expert system					<org.ipen.ai.es>
+	Natural language processing		<org.ipen.ai.nlp>
+		Stop-word removal			<org.ipen.ai.nlp.swr>
+--------------------------------------------------------------------------
+Information retrieval				<org.ipen.ir>
+	Retrieval models
+		Boolean
+		Vector space
+		Machine learning
+	Evaluation
+		Precision
+		Recall
+		Accuracy
+		F-Measure
+	Otimization
+		Relevance feedback
+		Query expansion
+--------------------------------------------------------------------------
+Internet							<org.ipen.internet>
+	HTTP							<org.ipen.internet.http>
+	HTML							<org.ipen.internet.html>
+	Twitter							<org.ipen.internet.twitter>
+	Facebook						<org.ipen.internet.facebook>
+--------------------------------------------------------------------------
+Java
+	Thread							<java.lang.thread>
+GUI
+	AWT
+	Swing
+
+##################################################################################################################################
+
+QueryTerms
+SeedPage
+Frontier
+MaxFrontierSize
+MaxCrawledSize
+PageRelevance
+
+Frontier pages		quee/stack/priority quee
+Crawled pages
+Relevant pages
+
+Crawler graph
+Crawler graph vertices
+Crawler graph edges
+
+##################################################################################################################################
+
+Crawler
+	1. Instanciar Seed:Collector()
+	2. Instanciar Evaluator:Evaluator()
+	3. Instanciar Stopper:Stopper(Frontier:Collection, Network:Collection)
+	4. Instanciar Searcher:Searcher(Seed:Colector, Evaluator:Evaluator, Stopper:Stopper)
+
+
+
+searchIteration		cada processo de busca é uma iteração, responsabilidade do Searcher
+searchStep			cada expansão de nó é um passo, responsabilidade do Searcher
+
+Searcher.startSearch(Evaluator, Stopper)		isSearching		searchStep
+Searcher.restartSearch(Evaluator, Stopper)		startedSearch	searchIteration
+Searcher.stopSearch
+
+Searcher.startSearch(Estimator, Stopper)
+	1. Instanciar Frontier:LinkedHashSet<Colector>
+	2. Instanciar Network:Graph<Content, <Content, Content>>
+	3. Instanciar variaveis(isSearching, currentColector, currentContent)
+
+		this.searchFrontier.removeAll(searchFrontier);
+		this.searchFrontier.addLast(super.getSeedPage());
+		this.currentNodesIndex = 0;
+		this.currentEdgeIndex = 0;
+		this.isSearching = true;
+
+	6. Se !isSearching E !Stopper.stop Então
+		3.1. Network.removeAll
+		3.1. Frontier.add()
+		3.1. isSearching = true
+
+	5. Se isSearching E !Stopper.stop Então
+		6. Searcher retira Colector do Frontier				currentColector
+		7. Searcher pede para Colector um Content			currentContent
+		8. Searcher pede para Estimator a relevancia		currentEstimator
+		9. Searcher adiciona Content no Network
+		10. Searcher pede para Colector os SubColectors
+		11. Searcher adiciona no Frontier os SubColectors
+
+
+
+
+
+org.ipen.ir
+org.ipen.ir.query
+Query
+
+org.ipen.kb
+Taxonomy
+Seed
+
+org.ipen.machinelearning
+	org.ipen.ml.ann
+	org.ipen.ml.bc
+	org.ipen.ml.svm
+
+org.ipen.nlp
+NLProcessor
+	POSTagger
+	SWRemover
+	Stemmer
+
+
+
+
+
+http://en.wikipedia.org/wiki/Graph_theory
+http://en.wikipedia.org/wiki/List_of_data_structures
+http://en.wikipedia.org/wiki/Graph_(data_structure)
+	Incidence list: The edges are represented by an array containing pairs (tuples if directed) of vertices (that the edge connects) and possibly weight and other data. Vertices connected by an edge are said to be adjacent.
+	Adjacency list: Much like the incidence list, each vertex has a list of which vertices it is adjacent to. This causes redundancy in an undirected graph: for example, if vertices A and B are adjacent, A's adjacency list contains B, while B's list contains A. Adjacency queries are faster, at the cost of extra storage space.
+	Incidence matrix: The graph is represented by a matrix of size |V | (number of vertices) by |E| (number of edges) where the entry [vertex, edge] contains the edge's endpoint data (simplest case: 1 - incident, 0 - not incident).
+	Adjacency matrix: This is an n by n matrix A, where n is the number of vertices in the graph. If there is an edge from a vertex x to a vertex y, then the element ax,y is 1 (or in general the number of xy edges), otherwise it is 0. In computing, this matrix makes it easy to find subgraphs, and to reverse a directed graph.
+	Laplacian matrix: This is defined as D - A, where D is the diagonal degree matrix. It explicitly contains both adjacency information and degree information. (However, there are other, similar matrices that are also called "Laplacian matrices" of a graph.)
+	Distance matrix: A symmetric n by n matrix D, where n is the number of vertices in the graph. The element dx,y is the length of a shortest path between x and y; if there is no such path dx,y = infinity. It can be derived from powers of A
+	First child/next sibling:
+
+org.ipen.graph
+	Graph									//interface
+		Digraph								//interface
+		AbstractGraph						//abstract class
+			HashGraph						//concrete class
+			LinkedHashGraph					//concrete class
+			AbstractDigraph					//abstract class
+				HashGraph					//concrete class
+				LinkedHashGraph				//concrete class
+	GraphIterator							//interface
+
+org.ipen.crawler
+	Crawler //interface
+	Content //classe, representa tipo basico de dados
+
+	org.ipen.crawler.searcher
+	Searcher								//interface
+		SearcherFactory						//factory class; factory method: createSearcher
+		AbstractSearcher					//abstract class; template method: search
+			BreadthSearcher					//concrete class; implements exhaustive search algorithm
+			DepthSearcher					//concrete class; implements exhaustive search algorithm
+			BestSearcher					//concrete class; implements heuristic search algorithm
+
+	org.ipen.crawler.collector
+	Collector
+		AbstractCollector
+			WebCollector
+			TwitterCollector
+			FacebookCollector
+
+	org.ipen.crawler.estimator
+	Estimator
+		AbstractEstimator
+			BooleanEstimator
+			VectorSpaceEstimator
+			NaiveBayesianEstimator
+			NeuralNetworkEstimator
+			SupportVectorMachineEstimator
+
+	org.ipen.crawler.stopper
+	Stopper
+		AbstractStopper
+			RunningTimeStopper
+			NetworkSizeStopper
+			RelevantContentStopper
+			IrrelevantContentStopper
+
+	org.ipen.crawler.evaluator
+	Evaluator
+		RecallEvaluator
+		PrecisionEvaluator
+
+
+
+Crawler
+	Query terms				implementado usando: HashSet
+	Seed page				implementado usando: String
+	Max frontier size		implementado usando: Integer
+	Max searched size		implementado usando: Integer
+	Search frontier			implementado usando: LinkedList
+	Search graph			implementado usando: LinkedHashMap
+		Vertices: Pages
+			Page			implementado usando: Page
+				Connected
+				Fetched
+				Relevance		implementado usando: Float
+		Edges: Links
+
+
+
+getQueryTerms
+setQueryTerms
+getSeedPage
+setSeedPage
+getMaxFrontierSize
+setMaxFrontierSize
+getMaxGraphSize
+setMaxGraphSize
+
+getFrontier
+getGraph
+
+doSearch
+
+
+
+
+
+
+
+
+template method search
+strategy
+factory method
+
+
+
+Information Retrieval System
+	Retrieval Model (boolean, ml, statistics)
+	Indexing Method (inverted index, latent semantic index)
+	Evaluation Metrics (precision, recall)
+	Optimization (query expansion, relevance feedback)
+
+##################################################################################################################################
+
+Class Hierarchy
+
+    java.lang.Object
+          org.jgrapht.Graphs
+          org.jgrapht.util.TypeUtil<T>
+          java.util.AbstractCollection<E> (implements java.util.Collection<E>)
+                java.util.AbstractList<E> (implements java.util.List<E>)
+                      java.util.ArrayList<E> (implements java.lang.Cloneable, java.util.List<E>, java.util.RandomAccess, java.io.Serializable)
+                            org.jgrapht.graph.ArrayUnenforcedSet<E> (implements java.util.Set<E>):org.jgrapht.util
+
+
+
+          org.jgrapht.graph.AbstractGraph<V,E> (implements Graph<V,E>)
+                org.jgrapht.graph.AbstractBaseGraph<V,E> (implements java.lang.Cloneable, Graph<V,E>, java.io.Serializable)
+                      org.jgrapht.graph.DefaultDirectedGraph<V,E> (implements DirectedGraph<V,E>)
+
+                org.jgrapht.graph.GraphDelegator<V,E> (implements Graph<V,E>, java.io.Serializable)
+                      org.jgrapht.graph.AsUndirectedGraph<V,E> (implements java.io.Serializable, UndirectedGraph<V,E>)
+
+          org.jgrapht.graph.ClassBasedEdgeFactory<V,E> (implements EdgeFactory<V,E>, java.io.Serializable)
+          org.jgrapht.graph.DefaultEdge
+                org.jgrapht.graph.DefaultWeightedEdge
+
+Interface Hierarchy
+
+    org.jgrapht.EdgeFactory<V,E>
+    org.jgrapht.graph.EdgeSetFactory<V,E>
+    org.jgrapht.Graph<V,E>
+          org.jgrapht.DirectedGraph<V,E>
+          org.jgrapht.UndirectedGraph<V,E>
+          org.jgrapht.WeightedGraph<V,E>
+    org.jgrapht.GraphPath<V,E>
+
+
+
+
+
+
+
+Graph(I)
+	DirectedGraph(I)
+		AbstractGraph(A)
+			AbstractBaseGraph(A)
+				DefaultDirectedGraph(C)
+
+IntrusiveEdge(C)
+	DefaultEdge(C)
+		DefaultWeightedEdge(C)
+
+EdgeFactory(I)
+	ClassBasedEdgeFactory(C)
+
+ArrayUneforcedSet
+TypeUtil
+EdgeSetFactory
+
+
+
+Graphs
+AsUndirectedGraph
+GraphDelegator
+GraphPath
+UndirectedGraph(I)
+WeightedGraph(I)
+
+
+
+edgeMap.put(e, intrusiveEdge);
+specifics.addEdgeToTouchingVertices(e);
