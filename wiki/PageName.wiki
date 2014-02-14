@@ -1,1 +1,108 @@
-http://wrttn.in/admin/cbf9f2c659d4
+http://wrttn.in/admin/334bcdb75691
+
+Text/token
+	public class Normalizer implements Resettable, Worker, Mutable
+		private final Form form;
+		private final boolean lower;
+		private String normalized;
+
+		public boolean normalize(String string)
+		public String getNormalized()
+
+Text
+	public class Splitter implements Resettable, Worker, Mutable
+		private final Pattern pattern;
+		private List<String> splits;
+
+		public boolean split(String text)
+		public List<String> getSplits()
+
+Token
+	public interface Stemmer extends Resettable, Worker, Mutable
+		protected String stem;
+
+		public boolean stem(String token)
+		public String getStem()
+
+	public abstract class Remover implements Resettable, Worker, Mutable
+		protected final Set<String> stopwords = new HashSet<>();
+		protected final Collection<String> filter;
+		protected final Pattern pattern;
+
+		public boolean remove(String token)
+		public boolean getResult()
+
+	public class StringFactory implements Factory<String>
+		toLowerCase
+		toTrim
+		*stem
+
+		private final boolean toLowerCase;
+		private final boolean toTrim;
+		private final Stemmer stemmer;
+
+		public boolean make(String string)
+		public String ship()
+
+	public abstract class TokenFactory implements Factory<Collection<String>>, Facade
+		*split
+		*remove
+		**toLowerCase
+		**toTrim
+		**stem
+
+		protected final StringFactory factory;
+		protected final Splitter splitter;
+		protected final Remover remover;
+
+		public boolean make(String string)
+
+Operations
+	normalize
+	split
+	lower
+	trim
+	remove
+	stem
+
+
+
+
+
+Transformer
+Conversor
+Manipulator
+Changer
+Morpher
+Operator
+Handler
+
+StringProcessor
+	Normalizer
+	*Splitter
+	Stemmer
+		AbstractStemmer
+			PorterStemmer
+			PaiceStemmer
+			LovinsStemmer
+
+	Filter/Remover/Distiller
+		StopwordFilter
+			PortugueseStopwordFilter
+			EnglishStopwordFilter
+		PatternFilter
+		BlacklistFilter
+
+
+
+String input = "teste";
+StringProcessor processor = new Splitter(new Normalizer());
+StringProcessor processor = new Filter(new Stemmer(new Normalizer()));
+
+if (processor.process(input)) {
+	String output = getString();
+}
+
+ByteStream
+CharStream
+StringStream
