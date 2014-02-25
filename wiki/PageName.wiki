@@ -1,2 +1,9 @@
-http://wrttn.in/admin/5b8a326eae6e
-enviar object-oriented design
+<p>http://bigocheatsheet.com/
+<p>http://wrttn.in/admin/6942d318e75c
+<p>
+<p>página -> consulta -> necessidade
+<p>bag of words -> keyword match -> information need
+<p>processo gradual de refinamento das consultas e avaliação das fontes
+<p>
+<p>fazer searcher q so guarda record
+<p>enviar head first object-oriented analysis & design
