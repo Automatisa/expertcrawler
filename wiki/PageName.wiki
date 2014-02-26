@@ -1,9 +1,15 @@
 <p>http://bigocheatsheet.com/
-<p>http://wrttn.in/admin/6942d318e75c
+<p>http://wrttn.in/admin/5f831210be97
 <p>
-<p>página -> consulta -> necessidade
-<p>bag of words -> keyword match -> information need
-<p>processo gradual de refinamento das consultas e avaliação das fontes
+<p>aula agentes 2
+<p>aula agentes de busca em grafo
+<p>aula tutorial java
+<p>aula trabalho quebra-cabeça
+<p>projeto webcrawler
+<p>aula redes neurais artificiais
 <p>
-<p>fazer searcher q so guarda record
-<p>enviar head first object-oriented analysis & design
+<p>aulas formato tutorial programacao
+<p>fazer tutorial introdutorio de java
+<p>aulas formato quiz treinamento seguranca
+<p>prova avaliacao pre-requisitos
+<p>aulas ead
