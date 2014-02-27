@@ -1,0 +1,83 @@
+<pre>
+public class Ambiente {
+	private boolean sujo1 = true;
+	private boolean sujo2 = true;
+
+	public boolean estaSujo(int sala) {
+		if (sala == 1) {
+			return sujo1;
+		} else {
+			return sujo2;
+		}
+	}
+
+	public void alterarSujo(int sala) {
+		if (sala == 1) {
+			sujo1 = false;
+		} else {
+			sujo2 = false;
+		}
+	}
+
+	public void usar() {
+		sujo1 = true;
+		sujo2 = true;
+	}
+}
+
+
+public class Agente {
+	private Ambiente ambiente;
+	private int sala;
+
+	public void limpar() {
+		ambiente.alterarSujo(sala);
+	}
+
+	public void descancar() {
+		ambiente.usar();
+
+		try {
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			//
+		}
+	}
+
+	public void mover() {
+		if (sala == 1) {
+			sala = 2;
+		} else {
+			sala = 1;
+		}
+	}
+
+	public void trabalhar(Ambiente ambiente, int sala) {
+		this.ambiente = ambiente;
+		this.sala = sala;
+
+		if (ambiente.estaSujo(sala)) {
+			limpar();
+		} else {
+			mover();
+		}
+
+		//descancar();
+		//trabalhar(this.ambiente, this.sala);
+	}
+}
+
+
+public class Teste {
+	public static void main(String[] args) {
+		Ambiente ambiente = new Ambiente();
+		Agente agente = new Agente();
+
+		agente.trabalhar(ambiente, 1);
+		System.out.println(ambiente.estaSujo(1));
+
+		agente.trabalhar(ambiente, 2);
+		System.out.println(ambiente.estaSujo(2));
+	}
+}
+</pre>
