@@ -1,0 +1,205 @@
+<pre>
+package com.log;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public interface Loggable {
+	Logger getLogger();
+	Level getLevel();
+}
+
+package com.log;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class LoggableException extends Exception implements Loggable {
+	//static state
+	private static final Level DEFAULT_LEVEL = Level.WARNING;
+	private static final Object a = System.in;
+
+	//immutable state
+	private final Logger logger;
+	private final Level level;
+
+	//constructors
+	public LoggableException(Logger logger, Level level) {
+		super();
+		this.logger = logger;
+		this.level = level;
+		logger.log(level, null, this);
+		Logger.getLogger(LoggableException.class.getName());
+	}
+
+	public LoggableException(Logger logger, Level level, String message) {
+		super(message);
+		this.logger = logger;
+		this.level = level;
+		logger.log(level, message, this);
+	}
+
+	public LoggableException(Logger logger, Level level, String message, Throwable cause) {
+		super(message, cause);
+		this.logger = logger;
+		this.level = level;
+		logger.log(level, message, this);
+	}
+
+	public LoggableException(Logger logger, Level level, Throwable cause) {
+		super(cause);
+		this.logger = logger;
+		this.level = level;
+		logger.log(level, null, this);
+	}
+
+	protected LoggableException(Logger logger, Level level, String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+		this.logger = logger;
+		this.level = level;
+		logger.log(level, message, this);
+	}
+
+	//loggable interface
+	@Override
+	public Logger getLogger() {
+		return logger;
+	}
+
+	@Override
+	public Level getLevel() {
+		return level;
+	}
+}
+
+package com.log;
+
+public class LoggableExceptionFactory {
+	
+}
+
+package com.log;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+//decorates a cause exception to add logging functionality or defines a root exception
+public class LoggableIOException extends IOException implements Loggable {
+	//immutable state
+	private final Logger logger;
+	private final Level level;
+
+	//constructors
+	public LoggableIOException(Logger logger, Level level, IOException cause) {
+		super(cause.getMessage() + " [logger name: " + logger.getName() + ", logger level: " + logger.getLevel() + ", exception level: " + level.getName() + "]", cause);
+		this.logger = logger;
+		this.level = level;
+		logger.log(level, cause.getMessage(), this);
+	}
+
+	//loggable interface
+	@Override
+	public Logger getLogger() {
+		return logger;
+	}
+
+	@Override
+	public Level getLevel() {
+		return level;
+	}
+}
+
+package com.log;
+
+import java.io.IOException;
+import static java.lang.System.out;
+import java.util.logging.Filter;
+import java.util.logging.LoggingMXBean;
+import java.util.logging.LoggingPermission;
+
+import java.util.logging.ErrorManager;
+import java.util.logging.Formatter;
+	import java.util.logging.SimpleFormatter;
+	import java.util.logging.XMLFormatter;
+import java.util.logging.Handler;
+	import java.util.logging.MemoryHandler;
+	import java.util.logging.StreamHandler;
+		import java.util.logging.ConsoleHandler;
+		import java.util.logging.SocketHandler;
+		import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.LogManager;
+import java.util.logging.LogRecord;
+
+/*
+http://docs.oracle.com/javase/tutorial/essential/exceptions/index.html
+
+http://docs.oracle.com/javase/8/docs/technotes/guides/logging/overview.html
+http://www.vogella.com/tutorials/Logging/article.html
+http://tutorials.jenkov.com/java-logging/index.html
+http://tutorials.jenkov.com/java-exception-handling/logging-where-to-log-exceptions.html
+https://today.java.net/article/2006/04/04/exception-handling-antipatterns
+
+logar exception no momento que ele ocorre
+relançar exception e logar ela mais acima
+guardar exceptions e logar depois
+criar exceptions especificas e logar no construtor dela
+
+
+
+
+
+how to logging:
+	handler
+	formatter
+	level (throw/catch level)
+
+when to logging:
+	throw or catch?		throw: LoggableException, catch: Logger
+	lower or higher?	lower: LoggableException, higher: Logger
+
+Application										catch and log checkeds exceptions (throws LoggableException?)
+	Searcher.search								throw checked exception
+		HypertextFactory.make					throw checked exception (DecoderException, FetcherException, ParserException)
+			LocatorFactory.make					throw checked exception (DecoderException)
+				Decoder.decode					throw checked exception
+					URISyntaxException
+					MalformedURLException
+
+			Fetcher.fetch						throw checked exception
+				IOException
+				IllegalArgumentException
+
+			Parser.parse						throw checked exception
+				IOException
+*/
+
+public class Tester {
+	public static void main(String[] args) throws IOException, SecurityException {
+		//Logger logger = Logger.getLogger(Tester.class.getName());
+		Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
+		FileHandler txtHandler = new FileHandler("C:\\Users\\trurktt\\Documents\\log.txt");
+		FileHandler xmlHandler = new FileHandler("C:\\Users\\trurktt\\Documents\\log.xml");
+
+		Formatter txtFormatter = new SimpleFormatter();
+		Formatter xmlFormatter = new XMLFormatter();
+
+		txtHandler.setFormatter(txtFormatter);
+		xmlHandler.setFormatter(xmlFormatter);
+
+		logger.addHandler(txtHandler);
+		logger.addHandler(xmlHandler);
+
+		logger.setLevel(Level.ALL);
+		logger.info("teste");
+		//logger.log(Level.SEVERE, "teste", null);
+
+		//out.println(logger.getName());
+		//out.println(logger.getParent().getName());
+		LogManager.getLogManager();
+	}
+}
+</pre>
