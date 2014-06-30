@@ -1,4 +1,24 @@
 <pre>
+Microsoft Home Use Program
+
+Próximos passos:
+
+1. Clique no link deste e-mail:
+https://www.microsofthup.com/hupbr/logon.aspx?cmd=ehup_activate&sid=31ce47782239484699cea4b1efb572d4&culture=pt-BR&country_id=BR
+
+2. Compre sua licença/chave do produto
+
+3. Baixe o software para o seu computador ou dispositivo
+
+A Microsoft respeita a sua privacidade. Para obter mais informações, leia a nossa Politica de Privacidade:
+http://go.microsoft.com/fwlink/?linkid=81184
+
+Microsoft Corporation
+One Microsoft Way
+Redmond, WA, USA 98052
+</pre>
+
+<pre>
 package com.log;
 
 import java.util.logging.Level;
