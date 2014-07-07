@@ -20,6 +20,12 @@ Mutability
 State
 	Stateful
 	Stateless
+
+Concepts
+	Abstraction
+	Encapsulation
+	Polymorphism
+	Relationship (Inheritance/Association)
 </pre>
 
 <pre>
