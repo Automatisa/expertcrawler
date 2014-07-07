@@ -1,4 +1,28 @@
 <pre>
+Object
+	State (fields)
+	Behaviour (methods)
+
+Relation
+	Inheritance
+	Association
+		Aggregation
+			Composition
+
+Responsibility
+	Knower
+	Worker
+
+Mutability
+	Mutable
+	Immutable
+
+State
+	Stateful
+	Stateless
+</pre>
+
+<pre>
 package com.log;
 
 import java.util.logging.Level;
