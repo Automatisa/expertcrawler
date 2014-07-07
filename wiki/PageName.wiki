@@ -1,4 +1,14 @@
 <pre>
+ligar marli
+enviar email marli
+salvar comprovantes
+
+ligar barroso
+enviar email valderes
+enviar email claudete
+</pre>
+
+<pre>
 Object
 	State (fields)
 	Behaviour (methods)
