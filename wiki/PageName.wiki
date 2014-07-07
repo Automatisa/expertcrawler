@@ -26,6 +26,32 @@ Concepts
 	Encapsulation
 	Polymorphism
 	Relationship (Inheritance/Association)
+
+Principles
+	SRP - The Single Responsibility Principle - A class should have one, and only one, reason to change.
+	OCP - The Open Closed Principle - You should be able to extend a classes behavior, without modifying it.
+	LSP - The Liskov Substitution Principle - Derived classes must be substitutable for their base classes.
+	DIP - The Dependency Inversion Principle - Depend on abstractions, not on concretions.
+	ISP - The Interface Segregation Principle - Make fine grained interfaces that are client specific.
+
+Design Patterns
+
+
+Specifics
+	hashCode
+	equals
+	toString
+	compareTo
+
+	Annotation
+	Generics
+	Lambda
+	Stream
+
+	Thread
+
+http://en.wikipedia.org/wiki/Unified_Modeling_Language
+http://www.codeproject.com/Articles/22769/Introduction-to-Object-Oriented-Programming-Concep
 </pre>
 
 <pre>
