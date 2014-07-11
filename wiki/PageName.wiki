@@ -1,19 +1,4 @@
 <pre>
-ligar marli
-enviar email marli
-salvar comprovantes
-
-ligar barroso
-enviar email valderes
-enviar email claudete
-</pre>
-
-<pre>
-http://en.wikipedia.org/wiki/Unified_Modeling_Language
-http://www.codeproject.com/Articles/22769/Introduction-to-Object-Oriented-Programming-Concep
-</pre>
-
-<pre>
 package com.log;
 
 import java.util.logging.Level;
