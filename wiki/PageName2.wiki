@@ -1,0 +1,74 @@
+<pre>
+public interface Bag<E> extends Collection<E>
+	//bag interface
+	int cardinality();
+	int frequency(Object object);
+	boolean contains(Object object, int min, int max);
+*	Set<E> toSet(Supplier<Set<E>> factory);
+*	Map<E, Integer> toMap(Supplier<Map<E, Integer>> factory);
+
+	BagIterator<E> occurrenceIterator();
+	BagIterator<E> distinctIterator();
+*	Stream<E> distinctStream();
+*	Stream<E> distinctParallelStream();
+
+	int add(E element, int occurrences);
+	int remove(Object object, int occurrences);
+	int put(E element, int occurrences);
+	int set(E element, int frequency);
+	int place(Object object, int frequency);
+	int erase(Object object);
+*	int eraseIf(Predicate<? super E> filter);
+
+	//collection interface
+	int size();
+	boolean isEmpty();
+	boolean contains(Object object);
+	Object[] toArray();
+	<T> T[] toArray(T[] array);
+
+*	default Stream<E> stream();
+*	default Stream<E> parallelStream();
+
+	boolean add(E element);
+	boolean remove(Object object);
+
+	boolean containsAll(Collection<?> collection);
+	boolean addAll(Collection<? extends E> collection);
+	boolean removeAll(Collection<?> collection);
+	boolean retainAll(Collection<?> collection);
+*	default boolean removeIf(Predicate<? super E> filter);
+	void clear();
+
+	//iterable interface
+	Iterator<E> iterator();
+*	default Spliterator<T> spliterator();
+*	default void forEach(Consumer<? super T> action);
+
+	//object interface
+	int hashCode();
+	boolean equals(Object object);
+	String toString();
+
+public interface BagIterator<E> extends Iterator<E>
+	//bag iterator behaviour
+	int occurrence();
+	int frequency();
+	//int set(int frequency);
+	//int delete();
+
+	//iterator behaviour
+	boolean hasNext();
+	E next();
+	void remove();
+
+protected static final class Frequency implements Serializable
+	public Frequency(int frequency)
+	public int get()
+	public int set(int frequency)
+
+	//object interface
+	public int hashCode()
+	public boolean equals(Object object)
+	public String toString()
+</pre>
