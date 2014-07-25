@@ -1,5 +1,4 @@
 <pre>
-
 public interface Bag<E> extends Collection<E>, Iterable<E>
 	//bag interface
 	int cardinality();
