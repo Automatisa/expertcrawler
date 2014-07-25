@@ -1,5 +1,6 @@
 <pre>
-public interface Bag<E> extends Collection<E>
+
+public interface Bag<E> extends Collection<E>, Iterable<E>
 	//bag interface
 	int cardinality();
 	int frequency(Object object);
@@ -7,10 +8,11 @@ public interface Bag<E> extends Collection<E>
 *	Set<E> toSet(Supplier<Set<E>> factory);
 *	Map<E, Integer> toMap(Supplier<Map<E, Integer>> factory);
 
-	BagIterator<E> occurrenceIterator();
-	BagIterator<E> distinctIterator();
-*	Stream<E> distinctStream();
-*	Stream<E> distinctParallelStream();
+*	Iterator<E> iterator(boolean unique);
+*	BagIterator<E> bagIterator();
+*	BagIterator<E> bagIterator(boolean unique);
+*	Stream<E> stream(boolean unique);
+*	Stream<E> parallelStream(boolean unique);
 
 	int add(E element, int occurrences);
 	int remove(Object object, int occurrences);
@@ -21,34 +23,35 @@ public interface Bag<E> extends Collection<E>
 *	int eraseIf(Predicate<? super E> filter);
 
 	//collection interface
-	int size();
-	boolean isEmpty();
-	boolean contains(Object object);
-	Object[] toArray();
-	<T> T[] toArray(T[] array);
+	int size();															HashSet/RegularEnumSet/JumboEnumSet/TreeSet
+	boolean isEmpty();													HashSet/RegularEnumSet/JumboEnumSet/TreeSet
+	boolean contains(Object object);									AbstractCollection/HashSet/RegularEnumSet/JumboEnumSet/TreeSet
+	Object[] toArray();													AbstractCollection
+	<T> T[] toArray(T[] array);											AbstractCollection
 
-*	default Stream<E> stream();
-*	default Stream<E> parallelStream();
+*	Stream<E> stream();													Collection
+*	Stream<E> parallelStream();											Collection
 
-	boolean add(E element);
-	boolean remove(Object object);
+	boolean add(E element);												AbstractCollection/HashSet/RegularEnumSet/JumboEnumSet/TreeSet
+	boolean remove(Object object);										AbstractCollection/HashSet/RegularEnumSet/JumboEnumSet/TreeSet
 
-	boolean containsAll(Collection<?> collection);
-	boolean addAll(Collection<? extends E> collection);
-	boolean removeAll(Collection<?> collection);
-	boolean retainAll(Collection<?> collection);
-*	default boolean removeIf(Predicate<? super E> filter);
-	void clear();
+	boolean containsAll(Collection<?> collection);						AbstractCollection/RegularEnumSet/JumboEnumSet
+	boolean addAll(Collection<? extends E> collection);					AbstractCollection/RegularEnumSet/JumboEnumSet/TreeSet
+	boolean removeAll(Collection<?> collection);						AbstractCollection/AbstractSet/RegularEnumSet/JumboEnumSet
+	boolean retainAll(Collection<?> collection);						AbstractCollection/RegularEnumSet/JumboEnumSet
+*	boolean removeIf(Predicate<? super E> filter);						Collection
+	void clear();														AbstractCollection/HashSet/RegularEnumSet/JumboEnumSet/TreeSet
 
 	//iterable interface
-	Iterator<E> iterator();
-*	default Spliterator<T> spliterator();
-*	default void forEach(Consumer<? super T> action);
+	Iterator<E> iterator();												HashSet/RegularEnumSet/JumboEnumSet/TreeSet
+*	Spliterator<T> spliterator();										Iterable/Collection/Set/HashSet/LinkedHashSet/SortedSet/TreeSet
+*	void forEach(Consumer<? super T> action);							Iterable
 
 	//object interface
-	int hashCode();
-	boolean equals(Object object);
-	String toString();
+	int hashCode();														AbstractSet
+	boolean equals(Object object);										AbstractSet/RegularEnumSet/JumboEnumSet
+	String toString();													AbstractCollection
+	Objetct clone();													HashSet/EnumSet/JumboEnumSet/TreeSet
 
 public interface BagIterator<E> extends Iterator<E>
 	//bag iterator behaviour
@@ -71,4 +74,57 @@ protected static final class Frequency implements Serializable
 	public int hashCode()
 	public boolean equals(Object object)
 	public String toString()
+
+//#####################################################################################################
+
+Objects
+Collections
+Bags
+
+public class Object
+	public interface Iterable<T>
+		public interface Collection<E> extends Iterable<E>
+			public abstract class AbstractCollection<E> implements Collection<E>
+
+			public interface Set<E> extends Collection<E>
+				public abstract class AbstractSet<E> extends AbstractCollection<E> implements Set<E>
+					public class HashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable, Serializable
+						public class LinkedHashSet<E> extends HashSet<E> implements Set<E>, Cloneable, Serializable
+					public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> implements Cloneable, Serializable
+						class RegularEnumSet<E extends Enum<E>> extends EnumSet<E>
+						class JumboEnumSet<E extends Enum<E>> extends EnumSet<E>
+				public interface SortedSet<E> extends Set<E>
+					public interface NavigableSet<E> extends SortedSet<E>
+						public class TreeSet<E> extends AbstractSet<E> implements NavigableSet<E>, Cloneable, Serializable
+
+			public class IdentityHashSet<E> extends AbstractSet<E> implements Set<E>, Serializable, Cloneable
+			public class WeakHashSet<E> extends AbstractSet<E> implements Set<E>
+
+			public interface Bag<E> extends Collection<E>
+				public abstract class AbstractBag<E> extends AbstractCollection<E> implements Bag<E>
+					public class HashBag<E> extends AbstractBag<E> implements Bag<E>, Cloneable, Serializable
+						public class LinkedHashBag<E> extends HashBag<E> implements Bag<E>, Cloneable, Serializable
+					public abstract class EnumBag<E extends Enum<E>> extends AbstractBag<E> implements Cloneable, Serializable
+						class RegularEnumBag<E extends Enum<E>> extends EnumBag<E>
+						class JumboEnumBag<E extends Enum<E>> extends EnumBag<E>
+					public class IdentityHashBag<E> extends AbstractBag<E> implements Bag<E>, Serializable, Cloneable
+					public class WeakHashBag<E> extends AbstractBag<E> implements Bag<E>
+				public interface SortedBag<E> extends Bag<E>
+					public interface NavigableBag<E> extends SortedBag<E>
+						public class TreeBag<E> extends AbstractBag<E> implements NavigableBag<E>, Cloneable, Serializable
+
+	public interface Map<K,V>
+		public abstract class AbstractMap<K,V> implements Map<K,V>
+			public class HashMap<K,V> extends AbstractMap<K,V> implements Map<K,V>, Cloneable, Serializable
+				public class LinkedHashMap<K,V> extends HashMap<K,V> implements Map<K,V>
+			public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements Serializable, Cloneable
+			public class IdentityHashMap<K,V> extends AbstractMap<K,V> implements Map<K,V>, Serializable, Cloneable
+			public class WeakHashMap<K,V> extends AbstractMap<K,V> implements Map<K,V>
+		public interface SortedMap<K,V> extends Map<K,V>
+			public interface NavigableMap<K,V> extends SortedMap<K,V>
+				public class TreeMap<K,V> extends AbstractMap<K,V> implements NavigableMap<K,V>, Cloneable, Serializable
+
+//#####################################################################################################
+
+http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java
 </pre>
