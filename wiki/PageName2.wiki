@@ -125,5 +125,101 @@ public class Object
 
 //#####################################################################################################
 
-http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java
+http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/tip/src/share/classes/
+http://commons.apache.org/proper/commons-collections/javadocs/api-release/index.html
+http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/index.html
+http://www.jroller.com/rajasekar/entry/java_fail_fast_iterators_exposed
+
+sobrecarga de metodos para operacoes distinct
+criar iterator implementation fail-fast
+criar bulk operations com distinct
+criar Bag.Entry<E> para stream
+tirar modify, concentrar em put/set
+
+	Entry(E element)
+	get()
+	add()
+	remove()
+	put(E element, int occurrences)
+	set(E element, int frequency)
+	putIfFound(Object object, int occurrences)
+	setIfFound(Object object, int frequency)
+	frequency()
+
+public interface Bag<E> implements Collection<E>, Map<E, Integer>
+
+int remove(Object object, boolean distinct);
+boolean containsAll(Collection<?> collection, boolean distinct);
+boolean addAll(Collection<? extends E> collection, boolean distinct);
+boolean removeAll(Collection<?> collection, boolean distinct);
+boolean retainAll(Collection<?> collection, boolean distinct);
+boolean removeIf(Predicate<? super E> filter, boolean distinct);
+int addIf(Predicate<? super E> filter, int occurrences);
+int setIf(Predicate<? super E> filter, int occurrences);
+
+Iterator<E> iterator(boolean distinct);
+BagIterator<E> bagIterator(boolean distinct);
+Stream<E> stream(boolean distinct);
+Stream<E> parallelStream(boolean distinct);
+
+Iterator<Bag.Entry<E>> entryIterator();
+Spliterator<Bag.Entry<E>> entrySpliterator();
+Stream<Bag.Entry<E>> entryStream(boolean unique);
+Stream<Bag.Entry<E>> entryParallelStream(boolean unique);
+
+Set<E> toView(Supplier<Set<E>> factory);																Returns a Set view of the keys contained in this map.
+Set<Bag.Entry<E>> toView(Supplier<Set<Bag.Entry<E>>> factory);										Returns a Set view of the mappings contained in this map.
+
+<T> Set<T> toView();
+
+boolean contains(Predicate<? super E> filter);
+boolean contains(Predicate<? super Bag.Entry<E>> filter);
+</pre>
+
+<pre>
+Interface;Return;;Method;Description
+Collection;boolean;;add(E e);Ensures that this collection contains the specified element (optional operation).
+Collection;boolean;;addAll(Collection<? extends E> c);Adds all of the elements in the specified collection to this collection (optional operation).
+Collection;void;;clear();Removes all of the elements from this collection (optional operation).
+Collection;boolean;;contains(Object o);Returns true if this collection contains the specified element.
+Collection;boolean;;containsAll(Collection<?> c);Returns true if this collection contains all of the elements in the specified collection.
+Collection;boolean;;equals(Object o);Compares the specified object with this collection for equality.
+Collection;int;;hashCode();Returns the hash code value for this collection.
+Collection;boolean;;isEmpty();Returns true if this collection contains no elements.
+Collection;Iterator<E>;;iterator();Returns an iterator over the elements in this collection.
+Collection;default Stream<E>;;parallelStream();Returns a possibly parallel Stream with this collection as its source.
+Collection;boolean;;remove(Object o);Removes a single instance of the specified element from this collection, if it is present (optional operation).
+Collection;boolean;;removeAll(Collection<?> c);Removes all of this collection's elements that are also contained in the specified collection (optional operation).
+Collection;default boolean;;removeIf(Predicate<? super E> filter);Removes all of the elements of this collection that satisfy the given predicate.
+Collection;boolean;;retainAll(Collection<?> c);Retains only the elements in this collection that are contained in the specified collection (optional operation).
+Collection;int;;size();Returns the number of elements in this collection.
+Collection;default Spliterator<E>;;spliterator();Creates a Spliterator over the elements in this collection.
+Collection;default Stream<E>;;stream();Returns a sequential Stream with this collection as its source.
+Collection;Object[];;toArray();Returns an array containing all of the elements in this collection.
+Collection;<T> T[];;toArray(T[] a);"Returns an array containing all of the elements in this collection; the runtime type of the returned array is that of the specified array."
+Map;void;;clear();Removes all of the mappings from this map (optional operation).
+Map;default V;;compute(K key, BiFunction<? super K,? super V,? extends V> remappingFunction);Attempts to compute a mapping for the specified key and its current mapped value (or null if there is no current mapping).
+Map;default V;;computeIfAbsent(K key, Function<? super K,? extends V> mappingFunction);If the specified key is not already associated with a value (or is mapped to null), attempts to compute its value using the given mapping function and enters it into this map unless null.
+Map;default V;;computeIfPresent(K key, BiFunction<? super K,? super V,? extends V> remappingFunction);If the value for the specified key is present and non-null, attempts to compute a new mapping given the key and its current mapped value.
+Map;boolean;;containsKey(Object key);Returns true if this map contains a mapping for the specified key.
+Map;boolean;;containsValue(Object value);Returns true if this map maps one or more keys to the specified value.
+Map;Set<Map.Entry<K,V>>;toView();entrySet();Returns a Set view of the mappings contained in this map.
+Map;boolean;;equals(Object o);Compares the specified object with this map for equality.
+Map;default void;forEach(BiConsumer<? super E,Integer> action);forEach(BiConsumer<? super K,? super V> action);Performs the given action for each entry in this map until all entries have been processed or the action throws an exception.
+Map;V;frequency(Object o);get(Object key);Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
+Map;default V;;getOrDefault(Object key, V defaultValue);Returns the value to which the specified key is mapped, or defaultValue if this map contains no mapping for the key.
+Map;int;;hashCode();Returns the hash code value for this map.
+Map;boolean;;isEmpty();Returns true if this map contains no key-value mappings.
+Map;Set<K>;toView();keySet();Returns a Set view of the keys contained in this map.
+Map;default V;;merge(K key, V value, BiFunction<? super V,? super V,? extends V> remappingFunction);If the specified key is not already associated with a value or is associated with null, associates it with the given non-null value.
+Map;V;;put(K key, V value);Associates the specified value with the specified key in this map (optional operation).
+Map;void;;putAll(Map<? extends K,? extends V> m);Copies all of the mappings from the specified map to this map (optional operation).
+Map;default V;;putIfAbsent(K key, V value);If the specified key is not already associated with a value (or is mapped to null) associates it with the given value and returns null, else returns the current value.
+Map;V;;remove(Object key);Removes the mapping for a key from this map if it is present (optional operation).
+Map;default boolean;;remove(Object key, Object value);Removes the entry for the specified key only if it is currently mapped to the specified value.
+Map;default boolean;;replace(K key, V oldValue, V newValue);Replaces the entry for the specified key only if currently mapped to the specified value.
+Map;default V;;replace(K key, V value);Replaces the entry for the specified key only if it is currently mapped to some value.
+Map;default void;;replaceAll(BiFunction<? super K,? super V,? extends V> function);Replaces each entry's value with the result of invoking the given function on that entry until all entries have been processed or the function throws an exception.
+Map;int;;size();Returns the number of key-value mappings in this map.
+Map;Collection<V>;;values();Returns a Collection view of the values contained in this map.
 </pre>
