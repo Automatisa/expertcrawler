@@ -1,0 +1,684 @@
+<pre>
+package com.miner.collection.bag;
+
+import java.util.Iterator;
+
+public interface BagIterator<E> extends Iterator<E> {
+	//bag iterator behaviour
+	int occurrence();
+	int frequency();
+	//int set(int frequency);
+	//int delete();
+
+	//iterator behaviour
+	@Override
+	boolean hasNext();
+
+	@Override
+	E next();
+
+	@Override
+	void remove();	
+}
+
+package com.miner.collection.bag;
+
+import java.util.Collection;
+import java.util.Set;
+import java.util.Map;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.stream.Stream;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+import java.util.function.Predicate;
+
+public interface Bag<E> extends Collection<E> {
+	//query operations
+	@Override int size();													//by occurrence
+	int cardinality();														//by distinction (map.size())
+	@Override boolean isEmpty();											//by occurrence/distinction (map.isEmpty())
+	int frequency(Object object);											//by distinction (map.get())
+	@Override boolean contains(Object object);								//by occurrence/distinction (map.contaisKey())
+
+	BagIterator<E> bagIterator();											//by occurrence (RepeatedBagIterator)
+	@Override Iterator<E> iterator();										//by occurrence (RepeatedBagIterator)
+	@Override Spliterator<E> spliterator();									//by occurrence (RepeatedBagIterator)
+	@Override Stream<E> stream();											//by occurrence (RepeatedBagIterator)
+	@Override Stream<E> parallelStream();									//by occurrence (RepeatedBagIterator)
+
+	BagIterator<E> bagIterator(boolean distinct);							//by occurrence/distinction (DistinctBagIterator/RepeatedBagIterator)
+	Iterator<E> iterator(boolean distinct);									//by occurrence/distinction (DistinctBagIterator/RepeatedBagIterator)
+	Spliterator<E> spliterator(boolean distinct);							//by occurrence/distinction (DistinctBagIterator/RepeatedBagIterator)
+	Stream<E> stream(boolean distinct);										//by occurrence/distinction (DistinctBagIterator/RepeatedBagIterator)
+	Stream<E> parallelStream(boolean distinct);								//by occurrence/distinction (DistinctBagIterator/RepeatedBagIterator)
+
+	Iterator<Entry<E>> entryIterator();										//by distinction
+	Spliterator<Entry<E>> entrySpliterator();								//by distinction
+	Stream<Entry<E>> entryStream();											//by distinction
+	Stream<Entry<E>> entryParallelStream();									//by distinction
+
+	@Override void forEach(Consumer<? super E> action);						//by occurrence (RepeatedBagIterator, Iterable.forEach())
+
+	//conversion operations
+	@Override Object[] toArray();											//by occurrence (RepeatedBagIterator, AbstractCollection.toArray())
+	@Override <T> T[] toArray(T[] array);									//by occurrence (RepeatedBagIterator, AbstractCollection.toArray(T[] array))
+	Set<E> toSet(Supplier<Set<E>> factory);									//by distinction (set.addAll())
+	Map<E, Integer> toMap(Supplier<Map<E, Integer>> factory);				//by distinction (getMap().entrySet().stream().forEach())
+
+	//modification operations
+	@Override boolean add(E element);										//by occurrence
+	@Override boolean remove(Object object);								//by occurrence
+	int put(E element, int occurrences);									//by distinction (returns previous frequency)
+	int set(E element, int frequency);										//by distinction (returns previous frequency)
+	int putIfPresent(Object object, int occurrences);						//by distinction (returns previous frequency)
+	int setIfPresent(Object object, int frequency);							//by distinction (returns previous frequency)
+	int delete(Object object);												//by distinction (returns previous frequency)
+
+	//bulk operations
+	@Override boolean containsAll(Collection<?> collection);
+	@Override boolean addAll(Collection<? extends E> collection);
+	@Override boolean removeAll(Collection<?> collection);
+	@Override boolean retainAll(Collection<?> collection);
+	@Override boolean removeIf(Predicate<? super E> filter);
+	int deleteIf(Predicate<? super E> filter);
+	@Override void clear();													//map.clear()
+
+	//object behaviour
+	@Override int hashCode();												//by distinction (map.hashCode())
+	@Override boolean equals(Object object);								//by distinction (map.equals())
+	@Override String toString();											//by distinction (map.toString())
+	//Object clone();
+
+	//miscellaneous
+	interface Entry<E> {
+		E element();
+		int frequency();
+	}
+}
+
+//TODO testar exaustivamente bag
+//TODO melhorar bulk operations fazendo looping pela menor colecao e buscando na maior
+//TODO verificar insercao de elemento nulo em TreeBag
+//TODO verificar comportamento do set do iterator
+//TODO verificar fail-fast do iterator
+
+package com.miner.collection.bag;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.AbstractCollection;
+import java.util.ConcurrentModificationException;
+import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
+public abstract class AbstractBag<E> extends AbstractCollection<E> implements Bag<E> {
+	//immutable state
+	//empty
+
+	//mutable state
+	protected transient int size = 0;
+	protected transient int modification = 0;
+
+	//constructors
+	//empty
+
+	//abstract bag behaviour
+	@Override
+	public int size() {
+		//operates by occurrence
+		return size;
+	}
+
+	@Override
+	public int cardinality() {
+		return delegate().size();
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return delegate().isEmpty();
+	}
+
+	@Override
+	public int frequency(Object object) {
+		Frequency value = delegate().get(object);
+		return (value == null ? 0 : value.get());
+	}
+
+	@Override
+	public boolean contains(Object object) {
+		return delegate().containsKey(object);
+	}
+
+	@Override
+	public BagIterator<E> bagIterator() {
+		return bagIterator(false);
+	}
+
+	@Override
+	public Iterator<E> iterator() {
+		return bagIterator(false);
+	}
+
+	/*
+	@Override
+	public Spliterator<E> spliterator() {
+		return Spliterators.spliterator(this, Spliterator.SIZED);
+	}
+
+	@Override
+	public Stream<E> stream() {
+		return StreamSupport.stream(spliterator(), false);
+	}
+
+	@Override
+	public Stream<E> parallelStream() {
+		return StreamSupport.stream(spliterator(), true);
+	}
+	*/
+
+	@Override
+	public BagIterator<E> bagIterator(boolean distinct) {
+		return (distinct ? new DistinctBagIterator() : new RepeatedBagIterator());
+	}
+
+	@Override
+	public Iterator<E> iterator(boolean distinct) {
+		return bagIterator(distinct);
+	}
+
+	@Override
+	public Spliterator<E> spliterator(boolean distinct) {
+		//TODO verificar characteristics do spliterator
+		return Spliterators.spliterator(bagIterator(distinct), size, (distinct ? Spliterator.DISTINCT : 0));
+	}
+
+	@Override
+	public Stream<E> stream(boolean distinct) {
+		return StreamSupport.stream(spliterator(distinct), false);
+	}
+
+	@Override
+	public Stream<E> parallelStream(boolean distinct) {
+		return StreamSupport.stream(spliterator(distinct), true);
+	}
+
+	@Override
+	public Iterator<Entry<E>> entryIterator() {
+		return new Iterator<Entry<E>>() {
+			//immutable state
+			private final Iterator<Map.Entry<E, Frequency>> iterator = delegate().entrySet().iterator();
+
+			//mutable state
+			private Map.Entry<E, Frequency> next;
+			private int comodification = modification;
+
+			//iterator behaviour
+			@Override
+			public boolean hasNext() {
+				return iterator.hasNext();
+			}
+
+			@Override
+			public Entry<E> next() {
+				if (comodification != modification) {
+					throw new ConcurrentModificationException();
+				}
+
+				next = iterator.next();
+
+				return new Entry<E>() {
+					private final E element = next.getKey();
+					private final int frequency = next.getValue().get();
+
+					@Override
+					public E element() {
+						return element;
+					}
+
+					@Override
+					public int frequency() {
+						return frequency;
+					}
+				};
+			}
+
+			@Override
+			public void remove() {
+				if (comodification != modification) {
+					throw new ConcurrentModificationException();
+				}
+
+				modify(next.getKey(), next.getValue(), 0);
+				comodification = modification;
+			}
+		};
+	}
+
+	@Override
+	public Spliterator<Entry<E>> entrySpliterator() {
+		//TODO verificar characteristics do spliterator
+		return Spliterators.spliterator(entryIterator(), size, Spliterator.DISTINCT);
+	}
+
+	@Override
+	public Stream<Entry<E>> entryStream() {
+		return StreamSupport.stream(entrySpliterator(), false);
+	}
+
+	@Override
+	public Stream<Entry<E>> entryParallelStream() {
+		return StreamSupport.stream(entrySpliterator(), true);
+	}
+
+	/*
+	@Override
+	public void forEach(Consumer<? super E> action) {
+		//empty
+	}
+	*/
+
+	/*
+	@Override
+	public Object[] toArray() {
+		//return delegate().keySet().toArray();
+		return super.toArray();
+	}
+
+	@Override
+	public <T> T[] toArray(T[] array) {
+		//return delegate().keySet().toArray(array);
+		return super.toArray(array);
+	}
+	*/
+
+	@Override
+	public Set<E> toSet(Supplier<Set<E>> factory) {
+		Set<E> set = factory.get();
+		set.addAll(delegate().keySet());
+		return set;
+	}
+
+	@Override
+	public Map<E, Integer> toMap(Supplier<Map<E, Integer>> factory) {
+		Map<E, Integer> map = factory.get();
+
+		delegate().entrySet().stream().forEach(entry -> {
+			map.put(entry.getKey(), entry.getValue().get());
+		});
+
+		return map;
+	}
+
+	//modification operations
+	@Override
+	public boolean add(E element) {
+		Frequency value = delegate().get(element);
+		return modify(element, value, (value == null ? 1 : value.get() + 1)) >= 0;
+	}
+
+	@Override
+	public boolean remove(Object object) {
+		Frequency value = delegate().get(object);
+		return modify(object, value, (value == null ? 0 : value.get() - 1)) > 0;
+	}
+
+	@Override
+	public int put(E element, int occurrences) {
+		//if absent, do insert
+		Frequency value = delegate().get(element);
+		return modify(element, value, (value == null ? occurrences : value.get() + occurrences));
+	}
+
+	@Override
+	public int set(E element, int frequency) {
+		//change frequency directly (increase, decrease or sets to zero)
+		//if absent, do insert
+		Frequency value = delegate().get(element);
+		return modify(element, value, frequency);
+	}
+
+	@Override
+	public int putIfPresent(Object object, int occurrences) {
+		//if absent, do not insert
+		Frequency value = delegate().get(object);
+		return modify(object, value, (value == null ? 0 : value.get() + occurrences));
+	}
+
+	@Override
+	public int setIfPresent(Object object, int frequency) {
+		//change frequency directly (increase, decrease or sets to zero)
+		//if absent, do not insert
+		Frequency value = delegate().get(object);
+		return modify(object, value, (value == null ? 0 : frequency));
+	}
+
+	@Override
+	public int delete(Object object) {
+		//change frequency directly (sets it to zero)
+		return modify(object, null, 0);
+	}
+
+	//bulk operations
+	@Override
+	public boolean containsAll(Collection<?> collection) {
+		return delegate().keySet().containsAll(collection);
+	}
+
+	@Override
+	public boolean addAll(Collection<? extends E> collection) {
+		//return super.addAll(collection);
+		return modify(collection, 1);
+	}
+
+	@Override
+	public boolean removeAll(Collection<?> collection) {
+		//return super.removeAll(collection);
+		return modify(collection, -1);
+	}
+
+	@Override
+	public boolean retainAll(Collection<?> collection) {
+		//return super.retainAll(collection);
+	}
+
+	@Override
+	public boolean removeIf(Predicate<? super E> filter) {
+		return delegate().keySet().removeIf(filter);
+	}
+
+	@Override
+	public int deleteIf(Predicate<? super E> filter) {
+		//return delegate().keySet().removeIf(filter);
+	}
+
+	@Override
+	public void clear() {
+		size = 0;
+		modification++;
+		delegate().clear();
+	}
+
+	//object interface
+	@Override
+	public int hashCode() {
+		return delegate().hashCode();
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (object == this) {
+			return true;
+		}
+
+		if (object == null) {
+			return false;
+		}
+
+		if (!(object instanceof Bag)) {
+			return false;
+		}
+
+		Bag<?> bag = (Bag<?>)object;
+
+		if (size() != bag.size()) {
+			return false;
+		}
+
+		if (cardinality() != bag.cardinality()) {
+			return false;
+		}
+
+		if (bag instanceof AbstractBag) {
+			return delegate().equals(((AbstractBag)bag).delegate());
+		} else {
+			for (BagIterator<?> iterator = bag.bagIterator(true); iterator.hasNext();) {
+				if (frequency(iterator.next()) != iterator.frequency()) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+	}
+
+	@Override
+	public String toString() {
+		return delegate().toString();
+	}
+
+	//miscellaneous
+	protected abstract Map<E, Frequency> delegate();
+
+	private int modify(Object element, Frequency frequency, int value) {
+		//element can be null or not null, no special meaning
+		//frequency not null means element exists, frequency null means to direct add or remove element
+		//positive value means to add/increment frequency, negative value means to decrement/remove frequency, zero value means to direct remove element
+
+		modification++;
+
+		if (frequency != null) {
+			if (value > 0) {
+				//change element
+				size += value - frequency.get();
+				return frequency.set(value);
+			} else {
+				//delete element
+				size -= frequency.get();
+				return delegate().remove(element).get();
+			}
+		} else {
+			if (value > 0) {
+				//insert element
+				delegate().put((E)element, new Frequency(value));
+				size += value;
+				return 0;
+			} else {
+				//delete element
+				frequency = delegate().remove(element);
+				value = (frequency == null ? 0 : frequency.get());
+				size -= value;
+				return value;
+			}
+		}
+	}
+
+	private boolean modify(Collection<?> collection, int direction) {
+		//1 = to add, -1 = to remove
+		assert direction == 1 || direction == -1;
+
+		int lastSize = size;
+
+		if (collection instanceof AbstractBag) {
+			((AbstractBag<?>)collection)
+				.delegate()
+				.entrySet()
+				.stream()
+				.forEach(
+					entry -> modify(entry.getKey(), entry.getValue(), direction * entry.getValue().get())
+				);
+		} else if (collection instanceof Bag) {
+			//((Bag<E>)collection).stream(true).forEach(element -> modify(iterator.next(), null, direction * iterator.frequency()));
+
+			for (BagIterator iterator = ((Bag<E>)collection).bagIterator(true); iterator.hasNext();) {
+				modify(iterator.next(), null, direction * iterator.frequency());
+			}
+		} else {
+			collection.stream().forEach(object -> modify(object, null, direction));
+		}
+
+		return size != lastSize;
+	}
+
+	private class RepeatedBagIterator implements BagIterator<E> {
+		//immutable state
+		private final Iterator<Map.Entry<E, Frequency>> iterator = delegate().entrySet().iterator();
+
+		//mutable state
+		private Map.Entry<E, Frequency> next;
+		private int occurrence = 0;
+		private int frequency = 0;
+		private int comodification = modification;
+
+		//bag iterator behaviour
+		@Override
+		public int occurrence() {
+			return occurrence;
+		}
+
+		@Override
+		public int frequency() {
+			return frequency;
+		}
+
+		@Override
+		public int set(int frequency) {
+			this.frequency = frequency;
+			return modify(next.getKey(), next.getValue(), frequency);
+		}
+
+		//iterator behaviour
+		@Override
+		public boolean hasNext() {
+			return iterator.hasNext() || occurrence < frequency;
+		}
+
+		@Override
+		public E next() {
+            if (comodification != modification) {
+				throw new ConcurrentModificationException();
+			}
+
+			if (occurrence == frequency) {
+				next = iterator.next();
+				occurrence = 0;
+				frequency = next.getValue().get();
+			}
+
+			occurrence++;
+			return next.getKey();
+		}
+
+		@Override
+		public void remove() {
+            if (comodification != modification) {
+				throw new ConcurrentModificationException();
+			}
+
+			modify(next.getKey(), next.getValue(), 0);
+			comodification = modification;
+		}
+	}
+
+	private class DistinctBagIterator implements BagIterator<E> {
+		//immutable state
+		private final Iterator<Map.Entry<E, Frequency>> iterator = delegate().entrySet().iterator();
+
+		//mutable state
+		private Map.Entry<E, Frequency> next;
+		private int comodification = modification;
+
+		//bag iterator behaviour
+		@Override
+		public int occurrence() {
+			return -1;
+		}
+
+		@Override
+		public int frequency() {
+			return next.getValue().get();
+		}
+
+		@Override
+		public int set(int frequency) {
+			return modify(next.getKey(), next.getValue(), frequency);
+		}
+
+		//iterator behaviour
+		@Override
+		public boolean hasNext() {
+			return iterator.hasNext();
+		}
+
+		@Override
+		public E next() {
+            if (comodification != modification) {
+				throw new ConcurrentModificationException();
+			}
+
+			next = iterator.next();
+			return next.getKey();
+		}
+
+		@Override
+		public void remove() {
+            if (comodification != modification) {
+				throw new ConcurrentModificationException();
+			}
+
+			modify(next.getKey(), next.getValue(), 0);
+			comodification = modification;
+		}
+	}
+
+	protected static final class Frequency implements Serializable {
+		//immutable state
+		//empty
+
+		//mutable state
+		private int frequency;
+
+		//constructors
+		public Frequency(int frequency) {
+			this.frequency = frequency;
+		}
+
+		//frequency behaviour
+		public int get() {
+			return frequency;
+		}
+
+		public int set(int frequency) {
+			int value = this.frequency;
+			this.frequency = frequency;
+			return value;
+		}
+
+		//object behaviour
+		@Override
+		public int hashCode() {
+			return new Integer(frequency).hashCode();
+		}
+
+		@Override
+		public boolean equals(Object object) {
+			if (object == this) {
+				return true;
+			}
+
+			if (object == null) {
+				return false;
+			}
+
+			if (!(object instanceof Frequency)) {
+				return false;
+			}
+
+			return new Integer(frequency).equals(object);
+		}
+
+		@Override
+		public String toString() {
+			return Integer.toString(frequency);
+		}
+	}
+}
+</pre>
