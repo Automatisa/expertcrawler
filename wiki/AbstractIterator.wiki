@@ -1,0 +1,34 @@
+<pre>
+public abstract class AbstractIterator<E> implements Iterator<E> {
+	//immutable state
+	protected final int comodification;
+
+	//mutable state
+	protected E current;
+
+	//constructors
+	protected AbstractIterator(int comodification) {
+		this.comodification = comodification;
+	}
+
+	//abstract iterator behaviour
+	//used in next() and remove()
+	protected final void checkComodification(int modification) {
+		if (comodification != modification) {
+			throw new ConcurrentModificationException();
+		}
+	}
+
+	//used in remove()
+	protected final void checkState() {
+		if (current == null) {
+			throw new IllegalStateException();
+		}
+	}
+}
+
+http://www.coderanch.com/t/609193/java/java/Class-Iterator-elements-Bag-Map
+http://code.google.com/p/google-collections/source/browse/trunk/src/com/google/#google%2Fcommon%2Fcollect
+http://svn.apache.org/viewvc/commons/proper/collections/trunk/src/main/java/org/apache/commons/collections4/
+https://github.com/goldmansachs/gs-collections/tree/master/collections/src/main/java/com/gs/collections/impl
+</pre>
