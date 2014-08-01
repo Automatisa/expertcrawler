@@ -2,6 +2,7 @@
 clear() usar modification()
 alterar decremento do size com -=
 containsAll como http://svn.apache.org/viewvc/commons/proper/collections/trunk/src/main/java/org/apache/commons/collections4/bag/AbstractMapBag.java?revision=1491258&view=markup
+
 alterar size para long como google
 
 public abstract class AbstractIterator<E> implements Iterator<E> {
