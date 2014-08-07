@@ -1,2 +1,4 @@
-mudar size/modification para transient
+<pre>
+size/modification para transient
 fazer metodos writeObject/readObject
+</pre>
