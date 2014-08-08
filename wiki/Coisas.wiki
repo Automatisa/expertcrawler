@@ -1,4 +1,0 @@
-<pre>
-size/modification para transient
-fazer metodos writeObject/readObject
-</pre>
