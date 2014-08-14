@@ -1,8 +1,9 @@
 <pre>
 falar samis
-responder barroso			encerramento empresa/abertura nova/cronograma
-perguntar cristina			link parte cenbracom
-fazer cronograma			5 meses (talvez + 2 em 2015)
+ligar marli			novo tratamento/prorrogacao contrato
+ligar barroso			encerramento empresa/abertura nova/cronograma
+perguntar cristina		link parte cenbracom
+fazer cronograma		5 meses (talvez + 2 em 2015)
 	fetcher/rss
 	ranker/expression
 	banco de dados
