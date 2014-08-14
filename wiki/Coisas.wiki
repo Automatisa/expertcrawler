@@ -1,5 +1,5 @@
 <pre>
-aulas doutorado
+aulas doutorado			enviar email thomaziello
 
 falar samis
 ligar marli			novo tratamento/prorrogacao contrato
