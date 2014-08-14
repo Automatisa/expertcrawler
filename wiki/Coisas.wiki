@@ -8,15 +8,4 @@ fazer cronograma		5 meses (talvez + 2 em 2015)
 	ranker/expression
 	banco de dados
 	servlets/paginas
-
-################################################
-
-fazer EnumBag
-verificar Entry.setCount()
-
-http://www.coderanch.com/t/609193/java/java/Class-Iterator-elements-Bag-Map
-http://code.google.com/p/guava-libraries/source/browse/#git%2Fguava%2Fsrc%2Fcom%2Fgoogle%2Fcommon%2Fcollect
-http://svn.apache.org/viewvc/commons/proper/collections/trunk/src/main/java/org/apache/commons/collections4/
-https://github.com/goldmansachs/gs-collections/tree/master/collections/src/main/java/com/gs/collections/impl
-
 </pre>
