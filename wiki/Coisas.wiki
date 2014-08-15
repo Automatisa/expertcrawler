@@ -1,9 +1,8 @@
 <pre>
-aulas doutorado 08/09		enviar email thomaziello/enviar email barroso/bido
+aulas doutorado 08/09		sinalizar thomaziello/sinalizar barroso/bido
 
-falar samis
-ligar marli			novo tratamento/prorrogacao contrato
-ligar barroso			encerramento empresa/abertura nova/cronograma
+ligar marli			novo tratamento/prorrogação contrato
+nova/cronograma
 perguntar cristina		link parte cenbracom
 fazer cronograma		5 meses (talvez + 2 em 2015)
 	fetcher/rss
