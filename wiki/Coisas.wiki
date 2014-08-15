@@ -10,6 +10,4 @@ fazer cronograma		5 meses (talvez + 2 em 2015)
 	ranker/expression
 	banco de dados
 	servlets/paginas
-
-http://www.ibm.com/developerworks/library/j-jtp11225/
 </pre>
