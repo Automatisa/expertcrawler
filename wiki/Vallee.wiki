@@ -1,0 +1,10 @@
+<pre>
+Matérias nacionais		problema
+Matérias internacionais		problema
+Propaganda			desatualizado
+Eventos				funcionando
+Indicadores			funcionando
+Pesquisar			problema
+Fale conosco			funcionando
+Sair				funcionando
+</pre>
