@@ -1,3 +1,0 @@
-<pre>
-verificar contrato da collection para bulk operations na bag
-</pre>
