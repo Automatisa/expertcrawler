@@ -1,0 +1,4 @@
+<pre>
+verificar canRemove de BagIterator
+http://svn.apache.org/viewvc/commons/proper/collections/trunk/src/main/java/org/apache/commons/collections4/bag/AbstractMapBag.java?revision=1491258&view=markup
+</pre>
