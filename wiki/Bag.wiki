@@ -11,11 +11,6 @@ pegar folga assiduidade
 TNA5796 - Métodos de Modelagem e de Pesquisa Quantitativa
 http://online.liebertpub.com/doi/pdf/10.1089/big.2014.0031
 
-colocar prefixo "as" nas views (asElementSet, asEntrySet)
-colocar prefixo "to" nas conversões (toArray, toSet, toMap)
-//TODO implementar outros tipos de mapa da collections framework
-//TODO escrever todo o javadoc
-
 http://docs.oracle.com/javase/8/docs/technotes/guides/collections/reference.html
 
 http://docs.neo4j.org/chunked/stable/preface.html
