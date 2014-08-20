@@ -17,5 +17,8 @@ colocar prefixo "as" nas views (asElementSet, asEntrySet)
 colocar prefixo "to" nas conversões (toArray, toSet, toMap)
 //TODO implementar outros tipos de mapa da collections framework
 //TODO escrever todo o javadoc
+
 http://docs.oracle.com/javase/8/docs/technotes/guides/collections/reference.html
+
+https://github.com/neo4j/neo4j
 </pre>
