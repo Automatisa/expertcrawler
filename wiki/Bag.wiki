@@ -10,6 +10,7 @@ pegar folga assiduidade
 	fazer encerramento conta caixa
 
 TNA5796 - Métodos de Modelagem e de Pesquisa Quantitativa
+http://online.liebertpub.com/doi/pdf/10.1089/big.2014.0031
 
 colocar prefixo "as" nas views (asElementSet, asEntrySet)
 colocar prefixo "to" nas conversões (toArray, toSet, toMap)
