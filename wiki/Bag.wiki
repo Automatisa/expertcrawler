@@ -1,9 +1,7 @@
 <pre>
-baixar Neo4j in Action
-resgatar multiplus
 ligar marli (haldol/prorrogacao/remedios)
 ligar nyere magic
-limpar armario
+resgatar multiplus
 aulas doutorado 08/09
 pegar folga assiduidade
 	fazer exame demissional
