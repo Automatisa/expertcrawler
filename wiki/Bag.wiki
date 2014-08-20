@@ -20,5 +20,6 @@ colocar prefixo "to" nas conversões (toArray, toSet, toMap)
 
 http://docs.oracle.com/javase/8/docs/technotes/guides/collections/reference.html
 
+http://docs.neo4j.org/chunked/stable/preface.html
 https://github.com/neo4j/neo4j
 </pre>
