@@ -5,10 +5,11 @@ ligar marli (haldol/prorrogacao/remedios)
 resgatar multiplus
 aulas doutorado 08/09
 pegar folga assiduidade
-	fazer exame demissional
-	entregar documentos impacta
-	fazer encerramento conta caixa
-	fazer almoço bruce
+	acordar				09h00-09h30
+	fazer exame demissional		10h30-11h00
+	entregar documentos impacta	11h30-12h00
+	fazer encerramento conta caixa	12h30-13h30
+	fazer almoço bruce		14h30-15h30
 
 TNA5796 - Métodos de Modelagem e de Pesquisa Quantitativa
 http://online.liebertpub.com/doi/pdf/10.1089/big.2014.0031
