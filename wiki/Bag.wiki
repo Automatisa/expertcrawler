@@ -13,6 +13,8 @@ casamento andre			30/08
 
 http://docs.oracle.com/javase/8/docs/technotes/guides/collections/reference.html
 
-http://docs.neo4j.org/chunked/stable/preface.html
 https://github.com/neo4j/neo4j
+http://api.neo4j.org/2.0.3/
+https://cs.brown.edu/courses/cs227/papers/neo4j.pdf
+http://docs.neo4j.org/chunked/stable/preface.html
 </pre>
