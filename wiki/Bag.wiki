@@ -1,13 +1,23 @@
 <pre>
-ligar marli			tratamento/contrato/remedios
+comprar barbeador
+lavar louças
+fazer licao ingles
+fazer projeto vallee
+pegar suco reuniao
+acertar abstractiterator			nome FailfastIterator, alterar exception no next para http://code.google.com/p/guava-libraries/source/browse/guava/src/com/google/common/collect/AbstractIterator.java
+
+ligar marli							novo tratamento/prorrogacao contrato/comprar remedios
+verificar diploma impacta
 fazer cronograma vallee
-fazer abertura empresa		abertura, vallee
+fazer abertura empresa				abertura, vallee
 alterar inicio ferias
-aulas doutorado 08/09		sinalizar barroso/bido
+aulas doutorado 08/09				sinalizar barroso/bido
 
 cancelamento caixa
-resgatar multiplus
-casamento andre			30/08
+resgatar multiplus					01/08	fogão, televisão, aspirador, espremedor, filtro
+casamento andre						30/08
+
+
 
 
 
