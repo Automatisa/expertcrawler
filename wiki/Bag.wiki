@@ -1,18 +1,17 @@
 <pre>
-enviar livros hadoop
 fazer licao ingles
 fazer projeto vallee
+fazer cronograma vallee
 
 ligar marli							novo tratamento/prorrogacao contrato/comprar remedios
-verificar diploma impacta
-fazer cronograma vallee
 fazer abertura empresa				abertura, vallee
 alterar inicio ferias
 aulas doutorado 08/09				sinalizar barroso/bido
-
 cancelamento caixa
-resgatar multiplus					01/08	fogão, televisão, aspirador, espremedor, filtro
-casamento andre						30/08
+
+pegar diploma impacta				30/08	10h00
+resgatar multiplus					30/08	fogão, televisão, aspirador, espremedor, filtro
+casamento andre						30/08	20h00
 
 
 
