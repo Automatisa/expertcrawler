@@ -1,0 +1,76 @@
+<pre>
+cronograma vallee
+fazer licao ingles
+resgatar multiplus
+email aulas barroso
+documentos diploma
+adicionar comentarios
+	http://www.jroller.com/rajasekar/entry/java_fail_fast_iterators_exposed
+	http://docs.oracle.com/javase/7/docs/api/java/util/Iterator.html
+	http://jcsites.juniata.edu/faculty/kruse/cs240/java/Tiny.java
+
+
+
+
+
+
+
+
+
+
+Atual
+	Notícias
+		IC News Diário					funcionando			abre notícia, faz envio
+		Matérias nacionais				problema			abre formulário de busca por concorrente
+		Matérias internacionais			problema			abre formulário de busca por concorrente/país
+		Propaganda						problema			abre formulário de busca por tipo de mídia
+		Pesquisar						problema			abre formulário de busca por tipo de mídia
+
+	Diversos
+		Eventos							funcionando			abre calendário de eventos, atualizado
+		Indicadores						funcionando			abre séries de indicadores, desatualizado
+
+	Funcional
+		Fale conosco					funcionando			abre tela de contato
+		Sair							funcionando
+
+Novo
+	Notícias						visualizar/pesquisar/divulgar
+		Últimas notícias
+		Pesquisar notícias
+	Eventos							visualizar/pesquisar/divulgar
+	Índices							visualizar/pesquisar/divulgar
+
+
+
+
+
+Rastreamento
+	Fetcher
+	Parser
+	NLP
+		Stop-word remover
+		Normalizer
+		Sppliter
+		Stemmer
+
+Indexação
+	vocabulary								tokens/words/term
+	collection/corpus/dictionary			documents/postings/entry/record
+	thesaurus
+	query
+	metadata (data, título, url)
+
+Recuperação
+	full-text search
+	bag-of-words model
+	keyword-based retrieval
+
+	Unranked retrieval
+		Expressão booleana
+
+	Ranked retrieval
+		Expressão regular
+		Modelo vetorial
+		Redes neurais
+</pre>
