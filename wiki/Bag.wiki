@@ -1,8 +1,4 @@
 <pre>
-http://coenraets.org/blog/2011/11/set-up-an-amazon-ec2-instance-with-tomcat-and-mysql-5-minutes-tutorial/
-
-http://www.locaweb.com.br/default.html
-
 http://docs.oracle.com/javase/8/docs/technotes/guides/collections/reference.html
 
 https://github.com/neo4j/neo4j
