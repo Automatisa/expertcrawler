@@ -1,0 +1,124 @@
+<pre>
+//TODO verificar http://nadeausoftware.com/node/73
+
+package com.miner.web;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.nio.charset.UnsupportedCharsetException;
+import java.nio.charset.IllegalCharsetNameException;
+import java.net.URLConnection;
+import com.miner.design.marker.Mutable;
+import com.miner.design.marker.Worker;
+import com.miner.design.Resettable;
+
+public class Fetcher implements Resettable, Worker, Mutable {
+	//immutable state
+	private final int connectTimeout;
+	private final int readTimeout;
+	private final Charset charset;
+
+	//mutable state
+	private String html;
+
+	//constructors
+	public Fetcher() {
+		this(10000, 10000, Charset.defaultCharset());
+	}
+
+	public Fetcher(int connectTimeout, int readTimeout, Charset charset) {
+		if (charset == null) {
+			throw new NullPointerException("Invalid null charset.");
+		}
+
+		if (connectTimeout < 0 || readTimeout < 0) {
+			throw new IllegalArgumentException("Invalid timeout(s) value.");
+		}
+
+		this.connectTimeout = connectTimeout;
+		this.readTimeout = readTimeout;
+		this.charset = charset;
+	}
+
+	//fetcher interface
+	public int getConnectTimeout() {
+		return connectTimeout;
+	}
+
+	public int getReadTimeout() {
+		return readTimeout;
+	}
+
+	public Charset getDefaultCharset() {
+		return charset;
+	}
+
+	public String getHTML() {
+		if (html == null) {
+			throw new IllegalStateException("Invalid fetcher state.");
+		}
+
+		return html;
+	}
+
+	public boolean fetch(Resource resource) {
+		if (resource == null) {
+			reset();
+			return false;
+		}
+
+		try {
+			URLConnection connection = resource.getLocator().newURL().openConnection();
+			connection.addRequestProperty("User-Agent", "Mozilla/4.76");
+			connection.setConnectTimeout(connectTimeout);
+			connection.setReadTimeout(readTimeout);
+
+			StringBuilder content = new StringBuilder();
+
+			try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), getCharset(connection)))) {
+				String line;
+
+				while ((line = bufferedReader.readLine()) != null) {
+					content.append(line);
+				}
+			}
+
+			//create a copy, don't share the string value array
+			this.html = content.toString();
+			return true;
+		} catch (IOException | IllegalArgumentException exception) {
+			this.html = null;
+			return false;
+		}
+	}
+
+	//resettable interface
+	@Override
+	public void reset() {
+		html = null;
+	}
+
+	//miscellaneous
+	private Charset getCharset(URLConnection connection) {
+		String header = connection.getHeaderField("Content-Type");
+
+		if (header == null) {
+			return charset;
+		}
+
+		int index = header.indexOf("charset");
+
+		if (index == -1) {
+			return charset;
+		}
+
+		try {
+			return Charset.forName(header.substring(index + 8));
+		} catch (UnsupportedCharsetException | IllegalCharsetNameException exception) {
+			return charset;
+		}
+	}
+}
+</pre>
