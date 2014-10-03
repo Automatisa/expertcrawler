@@ -1,333 +1,550 @@
 <pre>
-
-public abstract class Element
-	protected Element(Entity entity)
-	protected Element(Entity entity, Map<Attribute, Object> attributes)
-	public Entity getEntity()
-	public Map<Attribute, Object> getAttributes()
-	public String buildAttributes()
-	public String build()
-
-public abstract class EnclosureElement extends Element
-	protected EnclosureElement(Entity entity)
-	public List<Element> getElements()
-	public Element release(Object element)
-	public String build()
-
-public abstract class ContentElement extends EnclosureElement
-	protected ContentElement(Entity entity)
-	public ContentElement content(String content)
-	public String build()
-
-public class HTMLElement extends EnclosureElement
-	public HTMLElement()
-	public HTMLElement enclose(HeadElement element)
-	public HTMLElement enclose(BodyElement element)
-	public HTMLElement replace(Object oldElement, HeadElement newElement)
-	public HTMLElement define(Attribute attribute)
-
-
-
-
-
-Component/Part/Piece/Snippet
-	Document
-	Element
-	Markup
-	Content
-	Comment
-
-HTML
-	*Entity						p										Enum				getOpeningTag(), getClosingTag(), getOpeningTagging(), getClosingTagging()
-	Element/Markup/Tag			<p>, </p>								Class/Worker		getName(), getDescription(), getStartTag(), getEndTag()
-	Attribute					class="a"
-
-	Content						teste
-	Element						<p class="a">teste</p>										element(Object content)
-	Hypertext/Document			conjunto de elementos
-	Component					conjunto de elementos pré-definidos
-
-CSS
-
-HTML (immutable/shareable/composite/constraints (by method overloading))
-	Member (conhece a estrutura do elemento)
-		Element												<p>, </p>		Class/Worker		getName(), getDescription(), getOpeningTag(), getClosingTag(), getOpeningTagging(), getClosingTagging()
-			add(ConcreteElement element) : this								adiciona um dos possiveis elements, laça erro se
-			put(ConcreteElement element) : this
-			get() : Element													retorna subelemento
-			get() : List<Element>											retorna subelemento
-			write(Object object) : String									retorna nova string com elemento completo escrito
-		Comment?
-		Content?
-	Attribute												class="a"
-
-	Binder (mutable/assembler)
-	Tag								p										Enum/Knower			to help creating elements
-
-
-
-
-
-Estratégias
-	imutaveis/compartilhávies
-	nesteables/composites
-
-	mutáveis/compostos/decorators
-	nesteables (composite) or assembler ()?
-	controller (Document): imutaveis, snippet?
-	grafo: entidades, atributos, conteudos
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-conteudo: textos
-estrutura: marcacoes
-estilo: atributos/css
-comportamento: js
-
-tree/network/chain/structure/net/web
-node/vertex
-
-
-
-
-
-Element/Component: (mutavel devido varios enclose, pode ser total ou parcial)
-	conhece estrutura das entidades (imutavel/compartilhadas), atributos (imutavel/compartilhados), conteudos (imutavel?/compartilhados), comentarios (imutavel/compartilhados)
-	conhece quais entidades podem estar aninhadas
-	metodos fixos para adicionar entidades (pois sao fixas)?
-	metodos fixos para adicionar atributos (pois sao fixas)?
-
-Attribute:
-	conhece valor atual do atributo
-	conhece conjuto de valores possiveis para o atributo
-	metodos fixos para adicionar valores (pois sao fixas)?
-
-
-
-
-
-content: content
-element: enclose/release/replace
-comment: define
-attribute: specify/
-attribute: define/undefine/change
-html: write
-
-Element
-AbstractElement
-SoloElement/VoidElement/EmptyElement/FullElement/FilledElement/EntireElement
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-http://en.wikipedia.org/wiki/HTML
-http://en.wikipedia.org/wiki/HTML_element
-http://en.wikipedia.org/wiki/HTML_attribute
-
-https://developer.mozilla.org/pt-BR/docs/Web/HTML
-https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model usar nomenclatura
-
-http://www.w3.org/TR/html401/index/elements.html
-http://www.w3.org/TR/html401/index/attributes.html
-http://www.cs.tut.fi/~jkorpela/html/nesting.html
-
-packages
-	html
-	css
-	dom
-	js
-
-Document
-Node/Block/Identifier
-	Element
-		Markup/Tag
-			OpeningMarkup
-			ClosingMarkup
-	Comment
-	Content
-
-Component (defines structure/semantics)
-	Markup
-	Attribute
-
-Element (defines content/)
-	Markup
-	Attribute
-	Content
-
-
-
-Identifier
-Attribute
-Comment
-Content
-
-Tree
-Node
-
-
-
-
-
-
-
-
-
-
-classe stateless com static factory method usado via lambda expressions no cliente (nao precisa instanciar classe factory)
-
-filosofia
-	pojo
-	native tools (netbeans, java db, apache, tomcat)
-	frameworkless
-
-classes que organizam/geram codigo html/css (Page/Table/Menu/Form)
-	microsoft design http://msdn.microsoft.com/pt-br/library/windows/apps/hh781237.aspx
-
-	http://en.wikipedia.org/wiki/Web_template_system
-	http://en.wikipedia.org/wiki/Template_engine_%28web%29
-	http://velocity.apache.org/
-	http://freemarker.org/
-	http://docs.oracle.com/javase/8/docs/api/
-	https://code.google.com/p/gagawa/
-	https://code.google.com/p/jatl/
-	http://dom4j.sourceforge.net/dom4j-1.6.1/index.html
-	http://rendersnake.org/index.html
-
-	http://www.w3.org/TR/html401/ (elements, attributes)
-	http://www.w3.org/TR/CSS2/ (selectors, properties)
-
-	http://www.w3schools.com/html/
-	http://www.w3schools.com/css/
-	http://www.w3schools.com/js/js_htmldom.asp
-
-	getters/setters para atributos ou construtor (Tag td = new Tag("td", "align=left width=42%"))
-	decorator pattern para dom tree
-	Tree/Node classes
-
-	Interfaces
-		Component
-			Template (objeto q serve de template para formatação de outros objetos)
-			Hypertext (Document)
-			Element (Tag)
-			Attribute
-			Event
-			Content
-
-elementos com semantica (html5)
-quem pode estar dentro de quem
-em qual ordem podem aparecer
-metodo para validar automaticamente com w3c
-como usar lambdas para facilitar
-classes para formatacao/identacao do retorno do build
-api define o doctype automaticamente pelos elementos
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-reader/parser
-writer/builder/maker/creator/generator
-viewer/renderer
-
-HTMLReader
-HTMLWriter
-HTMLViewer
-
-HypertextReader
-HypertextWriter
-HypertextViewer
-
-Hypertext
-	Type
-	Header
-	Body
-
-Markup/Tag/Node/Block
-	Type
-	Header
-	Body
-	Anchor (usar nome da tag)
-
+package com.hypertry.web;
+
+public class Attribute {
+	//immutable state
+	protected final String name;
+	protected final String value;
+
+	//constructors
+	protected Attribute(String name, String value) {
+		this.name = name;
+		this.value = value;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	/*
+	public void setValue() {
+		//
+	}
+	*/
+}
+
+package com.hypertry.web;
+
+public class ClassAttribute extends Attribute {
+	private static final String NAME = "class";
+
+	public ClassAttribute(String name, String value) {
+		super(NAME, value);
+	}
+}
+
+package com.hypertry.web;
+
+public abstract class Element {
+	//immutable state
+	private static final String name;
+	private final String alias;
+	private final String description;
+	private final boolean hasContent;
+	/*private final boolean isBlocking;*/
+	/*private final boolean isInline;*/
+	private final Tagging openingTagging;
+	private final Tagging closingTagging;
+
+	protected Element(String name, String alias, String description, boolean hasContent, Tagging openingTagging, Tagging closingTagging) {
+		this.name = name;
+		this.alias = alias;
+		this.description = description;
+		this.hasContent = hasContent;
+		this.openingTagging = openingTagging;
+		this.closingTagging = closingTagging;
+	}
+
+	public String write(Object content) {
+		return content.toString();
+	}
+
+	public static class Tag {
+		private final String name;
+		private final String alias;
+		private final String description;
+		private final boolean hasContent;
+		/*private final boolean isBlocking;*/
+		/*private final boolean isInline;*/
+		private final Tagging openingTagging;
+		private final Tagging closingTagging;
+
+		protected Tag(String name, String alias, String description, boolean hasContent, Tagging openingTagging, Tagging closingTagging) {
+			this.name = name;
+			this.alias = alias;
+			this.description = description;
+			this.hasContent = hasContent;
+			this.openingTagging = openingTagging;
+			this.closingTagging = closingTagging;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public String getAlias() {
+			return alias;
+		}
+
+		public String getDescription() {
+			return description;
+		}
+
+		public boolean hasContent() {
+			return hasContent;
+		}
+
+		public Tagging getOpeningTagging() {
+			return openingTagging;
+		}
+
+		public Tagging getClosingTagging() {
+			return closingTagging;
+		}
+
+		/*passar set de atributos*/
+		public String getOpeningTag() {
+			//builder.append(NEW_LINE).append(OPEN_ANGLE_BRACKET).append(entity).append(CLOSE_ANGLE_BRACKET);
+			//builder.append(NEW_LINE).append(OPEN_ANGLE_BRACKET).append(CLOSE_SLASH).append(entity).append(CLOSE_ANGLE_BRACKET);
+			return null;
+		}
+
+		public enum Tagging {
+			REQUIRED,
+			OPTIONAL,
+			FORBIDDEN
+		}
+	}
+
+	//object interface
+	@Override
+	public String toString() {
+		return name;
+	}
+}
+
+package com.hypertry.web;
+
+import com.hypertry.design.Worker;
+import com.hypertry.design.Mutable;
+
+@Worker
+@Mutable
+public class Fetcher {
+	//empty
+}
+
+package com.hypertry.web;
+
+public class Hypertext extends Element {
+	//constant state
+	private static final Tag DEFINITION = new Tag("html", "html", "", true, Element.Tagging.OPTIONAL, Element.Tagging.OPTIONAL);
+
+	public Hypertext() {
+		super("html", "html", "", true, Element.Tagging.OPTIONAL, Element.Tagging.OPTIONAL);
+	}
+}
+
+package com.hypertry.web.html;
+
+//@Knower
+//@Immutable
+public class Descriptor {
+	private final String name;
+	private final String comment;
+
+	protected Descriptor(String name, String comment) {
+		this.name = name;
+		this.comment = comment;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+}
+
+package com.hypertry.web.html;
+
+public class ElementDescriptor extends Descriptor {
+	private final String alias;
+	private final boolean hasContent;
+	/*private final boolean isBlocking;*/
+	/*private final boolean isInline;*/
+	private final Tagging openingTagging;
+	private final Tagging closingTagging;
+
+	public ElementDescriptor(String name, String alias, String comment, boolean hasContent, Tagging openingTagging, Tagging closingTagging) {
+		super(name, comment);
+		this.alias = alias;
+		this.hasContent = hasContent;
+		this.openingTagging = openingTagging;
+		this.closingTagging = closingTagging;
+	}
+
+	public String getAlias() {
+		return alias;
+	}
+
+	public boolean hasContent() {
+		return hasContent;
+	}
+
+	public Tagging getOpeningTagging() {
+		return openingTagging;
+	}
+
+	public Tagging getClosingTagging() {
+		return closingTagging;
+	}
+
+	public enum Tagging {
+		REQUIRED,
+		OPTIONAL,
+		FORBIDDEN
+	}
+}
+
+package com.hypertry.web.html;
+
+public interface Member {
+	public String getName();
+	public String write();
+}
+
+package com.hypertry.web.html.attribute;
+
+public abstract class AbstractAttribute implements Attribute {
+	//mutable state
+	private Object value;
+
+	@Override
+	public String getName() {
+		return getDescriptor().getName();
+	}
+
+	@Override
+	public String write() {
+		return getDescriptor().getName() + "=";
+	}
+
+	//object behaviour
+	@Override
+	public int hashCode() {
+		return getDescriptor().getName().hashCode() ^ value.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (object == this) {
+			return true;
+		}
+
+		if (object == null) {
+			return false;
+		}
+
+		if (!(object instanceof AbstractAttribute)) {
+			return false;
+		}
+
+		return value.equals(((AbstractAttribute)object).value);
+	}
+
+	@Override
+	public String toString() {
+		return write();
+	}
+
+	protected abstract AttributeDescriptor getDescriptor();
+}
+
+package com.hypertry.web.html.attribute;
+
+import com.hypertry.web.html.Member;
+
+public interface Attribute extends Member {
+	//
+}
+
+package com.hypertry.web.html.attribute;
+
+import com.hypertry.web.html.Descriptor;
+
+public class AttributeDescriptor extends Descriptor {
+	/*
+	private static final String elements = "All elements but BASE, BASEFONT, HEAD, HTML, META, PARAM, SCRIPT, STYLE, TITLE";
+	private static final String type = "cdata";
+	private static final String def = "#IMPLIED";
+	private static final Boolean deprecated = false;
+	private static final String dtd = "";
+	*/
+
+	public AttributeDescriptor(String name, String alias, String comment) {
+		super(name, comment);
+	}
+}
+
+package com.hypertry.web.html.attribute;
+
+import java.util.Objects;
+
+//@Knower
+//@Mutable
+public class ClassAttribute extends AbstractAttribute {
+	//constant state
+	private static final AttributeDescriptor DESCRIPTOR = new AttributeDescriptor("class", "class", "space-separated list of classes");
+
+	//mutable state
+	private String value;
+
+	//constructors
+	public ClassAttribute(String value) {
+		Objects.requireNonNull(value);
+		//validate value according to http://www.w3.org/TR/html401/types.html#type-cdata
+		this.value = value;
+	}
+
+	//class behaviour
+	public String getValue() {
+		return value;
+	}
+
+	public String setValue(String value) {
+		String oldValue = this.value;
+		this.value = value;
+		return oldValue;
+	}
+
+	@Override
+	public String write() {
+		return super.write() + value;
+	}
+
+	@Override
+	protected AttributeDescriptor getDescriptor() {
+		return DESCRIPTOR;
+	}
+}
+
+package com.hypertry.web.html.attribute;
+
+import java.util.Objects;
+
+//@Knower
+//@Immutable
+public class Id {
+	//constant state
+	private static final String NAME = "id";
+	private static final String COMMENT = "document-wide unique id";
+
+	/*
+	private static final String elements = "All elements but BASE, HEAD, HTML, META, SCRIPT, STYLE, TITLE";
+	private static final String type = "id";
+	private static final String def = "#IMPLIED";
+	private static final Boolean deprecated = false;
+	private static final String dtd = "";
+	*/
+
+	//immutable state
+	private final String value;
+
+	//constructors
+	public Id(String value) {
+		Objects.requireNonNull(value);
+		//validate value according to http://www.w3.org/TR/html401/types.html#type-id
+		this.value = value;
+	}
+
+	//id behaviour
+	public String getName() {
+		return NAME;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public String write() {
+		return NAME + "=" + value;
+	}
+
+	/*
+	public String setValue(String value) {
+		String oldValue = this.value;
+		this.value = value;
+		return oldValue;
+	}
+	*/
+
+	//object behaviour
+	@Override
+	public int hashCode() {
+		return NAME.hashCode() ^ value.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (object == this) {
+			return true;
+		}
+
+		if (object == null) {
+			return false;
+		}
+
+		if (!(object instanceof Id)) {
+			return false;
+		}
+
+		return value.equals(((Id)object).value);
+	}
+
+	@Override
+	public String toString() {
+		return write();
+	}
+}
+
+package com.hypertry.web.html.element;
+
+import com.hypertry.web.html.Member;
+import com.hypertry.web.html.attribute.Attribute;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Anchor {
+	//constant state
+	private static final String NAME = "a";
+	private static final String ALIAS = "anchor";
+	private static final String DESCRIPTION = "";
+	private static final boolean CONTENT = true;
+	/*private static final boolean isBlocking;*/
+	/*private static final boolean isInline;*/
+	private static final Tagging OPENING_TAGGING = Tagging.REQUIRED;
+	private static final Tagging CLOSING_TAGGING = Tagging.REQUIRED;
+
+	//immutable state
+	private List<Member> members = new ArrayList<>();
+	private List<Attribute> attributes = new ArrayList<>();
+
+	//anchor behaviour
+	public String getName() {
+		return NAME;
+	}
+
+	public String getAlias() {
+		return ALIAS;
+	}
+
+	public String getDescription() {
+		return DESCRIPTION;
+	}
+
+	public boolean content() {
+		return CONTENT;
+	}
+
+	public Tagging getOpeningTagging() {
+		return OPENING_TAGGING;
+	}
+
+	public Tagging getClosingTagging() {
+		return CLOSING_TAGGING;
+	}
+
+	public enum Tagging {
+		REQUIRED,
+		OPTIONAL,
+		FORBIDDEN
+	}
+
+	public add() {
+		
+	}
+}
+
+package com.hypertry.web.html.element;
+
+import com.hypertry.web.html.Member;
+
+public interface Element extends Member {
+	//
+}
+
+package com.hypertry.web.html.element;
+
+import com.hypertry.web.html.Member;
+import com.hypertry.web.html.attribute.Attribute;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Hypertext {
+	//constant state
+	private static final String NAME = "html";
+	private static final String ALIAS = "hypertext";
+	private static final String DESCRIPTION = "document root element";
+	private static final boolean CONTENT = true;
+	/*private static final boolean isBlocking;*/
+	/*private static final boolean isInline;*/
+	private static final Tagging OPENING_TAGGING = Tagging.OPTIONAL;
+	private static final Tagging CLOSING_TAGGING = Tagging.OPTIONAL;
+
+	//immutable state
+	private List<Member> members = new ArrayList<>();
+	private List<Attribute> attributes = new ArrayList<>();
+
+	//anchor behaviour
+	public String getName() {
+		return NAME;
+	}
+
+	public String getAlias() {
+		return ALIAS;
+	}
+
+	public String getDescription() {
+		return DESCRIPTION;
+	}
+
+	public boolean content() {
+		return CONTENT;
+	}
+
+	public Tagging getOpeningTagging() {
+		return OPENING_TAGGING;
+	}
+
+	public Tagging getClosingTagging() {
+		return CLOSING_TAGGING;
+	}
+
+	public enum Tagging {
+		REQUIRED,
+		OPTIONAL,
+		FORBIDDEN
+	}
+
+	public Hypertext add(Head head) {
+		members.add(head);
+		return this;
+	}
+
+	public Hypertext add(Head head) {
+		members.add(head);
+		return this;
+	}
+
+	public Hypertext add(Body body) {
+		members.add(head);
+		return this;
+	}
+}
 </pre>
