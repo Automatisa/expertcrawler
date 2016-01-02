@@ -1,0 +1,15 @@
+<pre>
+http://docs.oracle.com/javase/8/docs/technotes/guides/collections/reference.html<br>
+<br>
+https://github.com/neo4j/neo4j<br>
+<br>
+http://docs.neo4j.org/chunked/stable/capabilities-capacity.html<br>
+<br>
+http://api.neo4j.org/2.0.3/<br>
+<br>
+https://cs.brown.edu/courses/cs227/papers/neo4j.pdf<br>
+<br>
+http://docs.neo4j.org/chunked/stable/preface.html<br>
+<br>
+http://www.agent31.eu/2011/03/diskmap-disk-backed-map-in-java.html<br>
+</pre>
